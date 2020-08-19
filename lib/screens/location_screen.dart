@@ -48,7 +48,6 @@ class _LocationScreenState extends State<LocationScreen> {
       body: Container(
         child: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +69,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 20),
+                    padding: EdgeInsets.only(top: 25),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -106,24 +105,29 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 15.0),
-                child: Column(
-                  children: <Widget>[
-                    Image.asset('images/clear-day.png', scale: 1,),
-                    SizedBox(height: 15,),
-                    Text('Clean day'),
-                    SizedBox(height:4,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
+              SizedBox(
+                height: 45,
+              ),
+              Column(
+                children: <Widget>[
+                  Image.asset(
+                    'images/clear-day.png',
+                    scale: 1,
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text('Clean day'),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        '70',
-                        style: TextStyle(
-                            color: kTextColor,
-                            fontSize: 80),
+                        '27',
+                        style: TextStyle(color: kTextColor, fontSize: 80),
                       ),
                       Container(
                         padding: EdgeInsets.only(top: 12),
@@ -135,23 +139,122 @@ class _LocationScreenState extends State<LocationScreen> {
                               fontSize: 20),
                         ),
                       ),
-
-                    ],)
-
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 15.0),
-                child: Text(
-                  "$weatherDescription in $cityName",
-                  textAlign: TextAlign.right,
-                  style: kMessageTextStyle,
-                ),
+                    ],
+                  ),
+                  Container(
+                      height: 80,
+                      margin: EdgeInsets.all(20),
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        children: [
+                          WeatherInfoCard(
+                            label: 'wind',
+                            value: 7,
+                            symbol: 'mph',
+                          ),
+                          SizedBox(
+                            width: kWidthBetweenCards,
+                          ),
+                          WeatherInfoCard(
+                            label: 'Humidity',
+                            value: 55,
+                            symbol: '%',
+                          ),
+                          SizedBox(
+                            width: kWidthBetweenCards,
+                          ),
+                          WeatherInfoCard(
+                            label: 'Rain',
+                            value: 10,
+                            symbol: '%',
+                          ),
+                          SizedBox(
+                            width: kWidthBetweenCards,
+                          ),
+                          WeatherInfoCard(
+                            label: 'Feels Like',
+                            value: 5,
+                            symbol: '°C',
+                          )
+                        ],
+                      )),
+                  SizedBox(height: 10,),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    alignment: Alignment.topLeft,
+                    child: Text('Wednesday, Today' , style: TextStyle(color: kTextColor, fontSize:14, fontWeight: FontWeight.bold),),
+                  ),
+                  Row(
+                    children: [
+                      DailyTempretureTemplate()
+                    ],
+                  )
+                ],
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DailyTempretureTemplate extends StatelessWidget {
+
+  DailyTempretureTemplate({this.time,this.imageSource,this.tempreture});
+  final String time;
+  final String imageSource;
+  final int tempreture;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child:Column(
+        children: [
+          Text('11am'),
+          Image.asset('images/few-clouds.png' , scale: 3.5,),
+          Text('12°C')
+        ],
+      ),
+    );
+  }
+}
+
+class WeatherInfoCard extends StatelessWidget {
+  WeatherInfoCard({@required this.label, @required this.value, this.symbol});
+  final String label;
+  final double value;
+  final String symbol;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 110,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(7.0)),
+          boxShadow: [
+            BoxShadow(
+                color: kIconColor.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: Offset(0, 3))
+          ],
+          color: Colors.white),
+      padding: EdgeInsets.only(top: 25, left: 12, right: 30, bottom: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(this.label),
+          SizedBox(
+            height: 4,
+          ),
+          Text(
+            '$value $symbol',
+            style: TextStyle(fontWeight: FontWeight.bold, color: kTextColor),
+          )
+        ],
       ),
     );
   }
