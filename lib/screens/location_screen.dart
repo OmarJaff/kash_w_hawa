@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:clima/services/weather.dart';
+import 'package:flutter/widgets.dart';
 import 'city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -44,65 +46,98 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/location_background.jpg'),
-            fit: BoxFit.cover,
-            colorFilter: ColorFilter.mode(
-                Colors.white.withOpacity(0.8), BlendMode.dstATop),
-          ),
-        ),
-        constraints: BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  FlatButton(
-                    onPressed: () async {
-                      var weatherData =
-                          await weather.getCurrentLocationWeather();
-                      updateUI(weatherData);
-                    },
-                    child: Icon(
-                      Icons.near_me,
-                      size: 50.0,
+                  Container(
+                    padding: EdgeInsets.only(top: 10),
+                    child: FlatButton(
+                      padding: EdgeInsets.only(right: 25),
+                      onPressed: () async {
+                        var weatherData =
+                            await weather.getCurrentLocationWeather();
+                        updateUI(weatherData);
+                      },
+                      child: Icon(
+                        Icons.more_vert,
+                        size: kIconSize,
+                        color: kIconColor,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          'Kash w Hawa',
+                          style: TextStyle(
+                              color: kTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                        SizedBox(height: 4),
+                        Text('Erbil, Iraq')
+                      ],
                     ),
                   ),
                   FlatButton(
-                    onPressed: () async{
-                      var typedName = await
-                      Navigator.push(
+                    padding: EdgeInsets.only(left: 25),
+                    onPressed: () async {
+                      var typedName = await Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => CityScreen()),
                       );
-                      if(typedName != null) {
-                        var weatherData = await weather.getCityWeather(typedName);
+                      if (typedName != null) {
+                        var weatherData =
+                            await weather.getCityWeather(typedName);
                         updateUI(weatherData);
                       }
                     },
                     child: Icon(
-                      Icons.location_city,
-                      size: 50.0,
+                      Icons.search,
+                      size: kIconSize,
+                      color: kIconColor,
                     ),
                   ),
                 ],
               ),
               Padding(
                 padding: EdgeInsets.only(left: 15.0),
-                child: Row(
+                child: Column(
                   children: <Widget>[
-                    Text(
-                      '${tempreture.toInt()}°',
-                      style: kTempTextStyle,
-                    ),
-                    Text(
-                      '$weatherIcon',
-                      style: kConditionTextStyle,
-                    ),
+                    Image.asset('images/clear-day.png', scale: 1,),
+                    SizedBox(height: 15,),
+                    Text('Clean day'),
+                    SizedBox(height:4,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+
+                      children: [
+                      Text(
+                        '70',
+                        style: TextStyle(
+                            color: kTextColor,
+                            fontSize: 80),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: 12),
+                        child: Text(
+                          '°C',
+                          style: TextStyle(
+                              color: kTextColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                      ),
+
+                    ],)
+
                   ],
                 ),
               ),

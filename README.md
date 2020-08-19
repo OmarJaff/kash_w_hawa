@@ -1,4 +1,4 @@
-# kash_w_hawa" ☁
+# kash_w_hawa ☁
 
 ## Our Goal
 

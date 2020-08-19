@@ -1,3 +1,4 @@
+import 'package:clima/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -32,7 +33,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
       body: Center(
         child: SpinKitDoubleBounce(
-          color: Colors.white,
+          color: Color(0xFFF8AB1C),
           size: 100,
         ),
       ),
