@@ -54,14 +54,28 @@ class _LocationScreenState extends State<LocationScreen> {
                 children: <Widget>[
                   Container(
                     padding: EdgeInsets.only(top: 10),
-                    child: FlatButton(
-                      padding: EdgeInsets.only(right: 25),
-                      onPressed: () async {
-                        var weatherData =
-                            await weather.getCurrentLocationWeather();
-                        updateUI(weatherData);
+                    child: PopupMenuButton(
+                      onCanceled: () {},
+                      onSelected: (result) {
+                        setState(() {
+
+                        });
                       },
-                      child: Icon(
+                      itemBuilder: (BuildContext context) => [
+                         PopupMenuItem(
+                          child: FlatButton(
+                            onPressed: () {  Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => CityScreen(),),);
+                            },
+                            child: Text('Settings'),
+                          ),
+                        )
+                      ],
+                      padding: EdgeInsets.only(right: 25),
+
+                      child:
+                      Icon(
                         Icons.more_vert,
                         size: kIconSize,
                         color: kIconColor,
