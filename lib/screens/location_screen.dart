@@ -184,12 +184,24 @@ class _LocationScreenState extends State<LocationScreen> {
                   Container(
                     margin: EdgeInsets.only(left: 20),
                     alignment: Alignment.topLeft,
-                    child: Text('Wednesday, Today' , style: TextStyle(color: kTextColor, fontSize:14, fontWeight: FontWeight.bold),),
+                    child: Text('Wednesday, Today' , style: TextStyle(color: kTextColor, fontSize:16, fontWeight: FontWeight.bold),),
                   ),
-                  Row(
-                    children: [
-                      DailyTempretureTemplate()
-                    ],
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    height: 100,
+                    child: ListView(
+                      physics:BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        DailyTempretureTemplate(time: '8pm', imageSource: 'images/clear-day.png', temperature: 28,),
+                        DailyTempretureTemplate(time: '9pm', imageSource: 'images/broken-clouds.png', temperature: 27,),
+                        DailyTempretureTemplate(time: '10pm', imageSource: 'images/scattered-clouds.png', temperature: 29,),
+                        DailyTempretureTemplate(time: '8pm', imageSource: 'images/clean-night.png', temperature: 25,),
+                        DailyTempretureTemplate(time: '11pm', imageSource: 'images/shower.png', temperature: 18,),
+                        DailyTempretureTemplate(time: '12am', imageSource: 'images/thunder.png', temperature: 12,),
+                        DailyTempretureTemplate(time: '1am', imageSource: 'images/snowy.png', temperature: -3,)
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -203,19 +215,22 @@ class _LocationScreenState extends State<LocationScreen> {
 
 class DailyTempretureTemplate extends StatelessWidget {
 
-  DailyTempretureTemplate({this.time,this.imageSource,this.tempreture});
+  DailyTempretureTemplate({this.time,this.imageSource,this.temperature});
   final String time;
   final String imageSource;
-  final int tempreture;
+  final int temperature;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 90,
       child:Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text('11am'),
-          Image.asset('images/few-clouds.png' , scale: 3.5,),
-          Text('12°C')
+          Text(time),
+          Image.asset(imageSource , scale: 4.5,),
+          Text('${temperature.toString()} °C')
         ],
       ),
     );
