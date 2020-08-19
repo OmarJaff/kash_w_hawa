@@ -1,6 +1,3 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
-
-
 # kash_w_hawa" ☁
 
 ## Our Goal
