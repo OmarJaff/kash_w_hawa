@@ -29,11 +29,14 @@ class WeeklyTempretureTemplate extends StatelessWidget {
             )
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            imageSource,
-            scale: 2.5,
+        
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              imageSource,
+              scale: 2.5,
+            ),
           ),
         ),
         Expanded(
