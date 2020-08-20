@@ -233,23 +233,25 @@ class _LocationScreenState extends State<LocationScreen> {
       bottomNavigationBar:
       BottomNavigationBar(
             backgroundColor: Colors.white,
-
+            selectedItemColor: kActiveItemColor,
           items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
             icon: Icon(
               Icons.wb_cloudy,
-              color: kIconColor,
               size: kbottomBarIconSize,
             ),
             title: Text("Current weather")),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.ac_unit,
-              color: kIconColor,
               size: kbottomBarIconSize,
             ),
-            title: Text('Forecast')
-        )
+            title: Text('Forecasts')
+        ) ,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Settings')
+            ),
       ]),
     );
   }
