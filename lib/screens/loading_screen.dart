@@ -1,8 +1,8 @@
-import 'package:clima/utilities/constants.dart';
+import 'package:KashWHawa/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:clima/services/weather.dart';
+import 'package:KashWHawa/services/weather.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override

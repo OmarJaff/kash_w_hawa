@@ -1,6 +1,6 @@
 
-import 'package:clima/services/location.dart';
-import 'package:clima/services/networking.dart';
+import 'package:KashWHawa/services/location.dart';
+import 'package:KashWHawa/services/networking.dart';
 
 const apiKey = 'a382eb8e2fef8e0b6f1cb8537e0daf01';
 const openWeatherMapURI = 'https://api.openweathermap.org/data/2.5/onecall';
