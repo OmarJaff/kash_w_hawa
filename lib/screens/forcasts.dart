@@ -2,6 +2,7 @@ import 'package:KashWHawa/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/components/weeklyTempretureTemplate.dart';
+import 'package:KashWHawa/components/mainAppTitle.dart';
 
 class Forcasts extends StatefulWidget {
   @override
@@ -19,13 +20,7 @@ class _ForcastsState extends State<Forcasts> {
             padding: EdgeInsets.only(top: 20),
             child: Column(
               children: <Widget>[
-                Text(
-                  'This Week',
-                  style: TextStyle(
-                      color: kTextColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ),
+                 MainAppTitleName(),
                 SizedBox(height: 4),
                 Text('Erbil, Iraq')
               ],

@@ -6,6 +6,8 @@ import 'package:KashWHawa/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import '../services/weather.dart';
 import 'package:flutter/widgets.dart';
+import 'package:KashWHawa/components/mainAppTitle.dart';
+
 
 class CurrentWeather extends StatefulWidget {
   CurrentWeather({this.weatherData});
@@ -72,13 +74,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                     flex: 3,
                     child: Column(
                       children: <Widget>[
-                        Text(
-                          'Kash w Hawa',
-                          style: TextStyle(
-                              color: kTextColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        ),
+                        MainAppTitleName(),
                         SizedBox(height: 4),
                         Text('Erbil, Iraq')
                       ],
@@ -261,3 +257,5 @@ class _CurrentWeatherState extends State<CurrentWeather> {
     );
   }
 }
+
+
