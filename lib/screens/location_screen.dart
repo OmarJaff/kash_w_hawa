@@ -1,8 +1,8 @@
 import 'package:KashWHawa/screens/current_weather.dart';
-import 'package:KashWHawa/screens/current_weather.dart';
+import 'package:KashWHawa/utilities/constants.dart';
+import 'package:KashWHawa/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:KashWHawa/utilities/constants.dart';
 import 'package:flutter/widgets.dart';
 import 'package:KashWHawa/screens/settings.dart';
 import 'package:KashWHawa/screens/forcasts.dart';
@@ -56,7 +56,7 @@ class _LocationScreenState extends State<LocationScreen> {
       BottomNavigationBar(
         currentIndex: _pageIndex,
             onTap: onTabTapped,
-            backgroundColor: Colors.white,
+            backgroundColor: kbackgroundColor,
             selectedItemColor: kActiveItemColor,
 
           items: const <BottomNavigationBarItem>[

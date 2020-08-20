@@ -103,7 +103,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
               ),
             ),
             SizedBox(
-              height: 45,
+              height: 40,
             ),
             Column(
               children: <Widget>[
@@ -112,7 +112,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                   scale: 1,
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 20,
                 ),
                 Text('Clean day'),
                 SizedBox(
@@ -139,8 +139,8 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                   ],
                 ),
                 Container(
-                    height: 80,
-                    margin: EdgeInsets.all(10),
+                    height: 70,
+                    margin: EdgeInsets.all(15),
                     child: ListView(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -180,48 +180,56 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                 SizedBox(
                   height: 5,
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Wednesday, Today',
-                    style: TextStyle(
-                        color: kTextColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(15),
-                  height: 80,
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      DailyTempretureTemplate(
-                        time: '8pm',
-                        imageSource: 'images/clear-day.png',
-                        temperature: 28,
-                      ),
-                      DailyTempretureTemplate(
-                        time: '9pm',
-                        imageSource: 'images/broken-clouds.png',
-                        temperature: 27,
-                      ),
-                      DailyTempretureTemplate(
-                        time: '10pm',
-                        imageSource: 'images/scattered-clouds.png',
-                        temperature: 29,
-                      ),
-                      DailyTempretureTemplate(
-                        time: '8pm',
-                        imageSource: 'images/clean-night.png',
-                        temperature: 25,
-                      ),
+                Column(
 
-                    ],
-                  ),
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Wednesday, Today',
+                        style: TextStyle(
+                            color: kTextColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top:20, left: 10,right: 10),
+                      height: 80,
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          DailyTempretureTemplate(
+                            time: '8pm',
+                            imageSource: 'images/clear-day.png',
+                            temperature: 28,
+                          ),
+                          DailyTempretureTemplate(
+                            time: '9pm',
+                            imageSource: 'images/broken-clouds.png',
+                            temperature: 27,
+                          ),
+                          DailyTempretureTemplate(
+                            time: '10pm',
+                            imageSource: 'images/scattered-clouds.png',
+                            temperature: 29,
+                          ),
+                          DailyTempretureTemplate(
+                            time: '8pm',
+                            imageSource: 'images/clean-night.png',
+                            temperature: 25,
+                          ),
+
+                        ],
+                      ),
+                    ),
+                  ],
+
                 ),
+
+
               ],
             ),
 
