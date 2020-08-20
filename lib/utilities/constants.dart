@@ -36,6 +36,7 @@ const kInputDecorations = InputDecoration(
 
 const Color kPrimaryColor = Color(0xFF9BA3B9);
 const double kIconSize = 35;
+const double kbottomBarIconSize = 22;
 const Color kTextColor = Color(0xFF181D30);
 const Color kIconColor = Color(0xFF5E6369);
 const double  kWidthBetweenCards = 8;

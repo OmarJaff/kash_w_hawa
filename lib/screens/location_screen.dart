@@ -84,7 +84,8 @@ class _LocationScreenState extends State<LocationScreen> {
                         onPressed: () async {
                           var typedName = await Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CityScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => CityScreen()),
                           );
                           if (typedName != null) {
                             var weatherData =
@@ -235,13 +236,35 @@ class _LocationScreenState extends State<LocationScreen> {
                         )
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
+
             ],
           ),
         ),
       ),
+      bottomNavigationBar:
+      BottomNavigationBar(
+            backgroundColor: Colors.white,
+
+          items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.wb_cloudy,
+              color: kIconColor,
+              size: kbottomBarIconSize,
+            ),
+            title: Text("Current weather")),
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.ac_unit,
+              color: kIconColor,
+              size: kbottomBarIconSize,
+            ),
+            title: Text('Forecast')
+        )
+      ]),
     );
   }
 }
