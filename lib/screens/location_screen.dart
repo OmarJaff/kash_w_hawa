@@ -49,75 +49,58 @@ class _LocationScreenState extends State<LocationScreen> {
         child: SafeArea(
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 10),
-                    child: PopupMenuButton(
-                      onCanceled: () {},
-                      onSelected: (result) {
-                        setState(() {
-
-                        });
-                      },
-                      itemBuilder: (BuildContext context) => [
-                         PopupMenuItem(
-                          child: FlatButton(
-                            onPressed: () {  Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => CityScreen(),),);
-                            },
-                            child: Text('Settings'),
-                          ),
-                        )
-                      ],
-                      padding: EdgeInsets.only(right: 25),
-
-                      child:
-                      Icon(
-                        Icons.more_vert,
-                        size: kIconSize,
-                        color: kIconColor,
+              Container(
+                padding: EdgeInsets.only(top: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      child: FlatButton(
+                        onPressed: () {},
+                        child: Icon(
+                          Icons.location_on,
+                          color: kIconColor,
+                          size: kIconSize,
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 25),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          'Kash w Hawa',
-                          style: TextStyle(
-                              color: kTextColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+                    Container(
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            'Kash w Hawa',
+                            style: TextStyle(
+                                color: kTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                          SizedBox(height: 4),
+                          Text('Erbil, Iraq')
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: FlatButton(
+                        onPressed: () async {
+                          var typedName = await Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CityScreen()),
+                          );
+                          if (typedName != null) {
+                            var weatherData =
+                                await weather.getCityWeather(typedName);
+                            updateUI(weatherData);
+                          }
+                        },
+                        child: Icon(
+                          Icons.search,
+                          size: kIconSize,
+                          color: kIconColor,
                         ),
-                        SizedBox(height: 4),
-                        Text('Erbil, Iraq')
-                      ],
+                      ),
                     ),
-                  ),
-                  FlatButton(
-                    padding: EdgeInsets.only(left: 25),
-                    onPressed: () async {
-                      var typedName = await Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CityScreen()),
-                      );
-                      if (typedName != null) {
-                        var weatherData =
-                            await weather.getCityWeather(typedName);
-                        updateUI(weatherData);
-                      }
-                    },
-                    child: Icon(
-                      Icons.search,
-                      size: kIconSize,
-                      color: kIconColor,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(
                 height: 45,
@@ -194,26 +177,62 @@ class _LocationScreenState extends State<LocationScreen> {
                           )
                         ],
                       )),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     margin: EdgeInsets.only(left: 20),
                     alignment: Alignment.topLeft,
-                    child: Text('Wednesday, Today' , style: TextStyle(color: kTextColor, fontSize:16, fontWeight: FontWeight.bold),),
+                    child: Text(
+                      'Wednesday, Today',
+                      style: TextStyle(
+                          color: kTextColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.all(20),
                     height: 100,
                     child: ListView(
-                      physics:BouncingScrollPhysics(),
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       children: [
-                        DailyTempretureTemplate(time: '8pm', imageSource: 'images/clear-day.png', temperature: 28,),
-                        DailyTempretureTemplate(time: '9pm', imageSource: 'images/broken-clouds.png', temperature: 27,),
-                        DailyTempretureTemplate(time: '10pm', imageSource: 'images/scattered-clouds.png', temperature: 29,),
-                        DailyTempretureTemplate(time: '8pm', imageSource: 'images/clean-night.png', temperature: 25,),
-                        DailyTempretureTemplate(time: '11pm', imageSource: 'images/shower.png', temperature: 18,),
-                        DailyTempretureTemplate(time: '12am', imageSource: 'images/thunder.png', temperature: 12,),
-                        DailyTempretureTemplate(time: '1am', imageSource: 'images/snowy.png', temperature: -3,)
+                        DailyTempretureTemplate(
+                          time: '8pm',
+                          imageSource: 'images/clear-day.png',
+                          temperature: 28,
+                        ),
+                        DailyTempretureTemplate(
+                          time: '9pm',
+                          imageSource: 'images/broken-clouds.png',
+                          temperature: 27,
+                        ),
+                        DailyTempretureTemplate(
+                          time: '10pm',
+                          imageSource: 'images/scattered-clouds.png',
+                          temperature: 29,
+                        ),
+                        DailyTempretureTemplate(
+                          time: '8pm',
+                          imageSource: 'images/clean-night.png',
+                          temperature: 25,
+                        ),
+                        DailyTempretureTemplate(
+                          time: '11pm',
+                          imageSource: 'images/shower.png',
+                          temperature: 18,
+                        ),
+                        DailyTempretureTemplate(
+                          time: '12am',
+                          imageSource: 'images/thunder.png',
+                          temperature: 12,
+                        ),
+                        DailyTempretureTemplate(
+                          time: '1am',
+                          imageSource: 'images/snowy.png',
+                          temperature: -3,
+                        )
                       ],
                     ),
                   )
@@ -228,8 +247,7 @@ class _LocationScreenState extends State<LocationScreen> {
 }
 
 class DailyTempretureTemplate extends StatelessWidget {
-
-  DailyTempretureTemplate({this.time,this.imageSource,this.temperature});
+  DailyTempretureTemplate({this.time, this.imageSource, this.temperature});
   final String time;
   final String imageSource;
   final int temperature;
@@ -238,12 +256,15 @@ class DailyTempretureTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 90,
-      child:Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(time),
-          Image.asset(imageSource , scale: 4.5,),
+          Image.asset(
+            imageSource,
+            scale: 4.5,
+          ),
           Text('${temperature.toString()} °C')
         ],
       ),

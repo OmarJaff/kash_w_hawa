@@ -19,7 +19,7 @@ class WeatherModel {
     NetworkingHelper networkingHelper = NetworkingHelper('$openWeatherMapURI?lat=${location.latitude}&lon=${location.longitude}&lang=ar&exclude=minutely&appid=$apiKey&units=metric');
     var weatherData = await networkingHelper.getData();
 //    return weatherData;
-    print(weatherData);
+//    print(weatherData);
   }
 
 
