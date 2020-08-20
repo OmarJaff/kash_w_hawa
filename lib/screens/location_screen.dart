@@ -20,8 +20,8 @@ class _LocationScreenState extends State<LocationScreen> {
   PageController _pageController;
   List<Widget> tabPages = [
     CurrentWeather(),
+    Forcasts(),
     Settings(),
-    Forcasts()
   ];
   @override
   void initState() {

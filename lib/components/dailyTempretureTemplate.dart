@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DailyTempretureTemplate extends StatelessWidget {
-  DailyTempretureTemplate({this.time, this.imageSource, this.temperature});
+  DailyTempretureTemplate({this.time, this.imageSource, this.temperature, this.scale = 3.9});
   final String time;
   final String imageSource;
   final int temperature;
-
+  final double scale;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +19,7 @@ class DailyTempretureTemplate extends StatelessWidget {
             Text(time),
             Image.asset(
               imageSource,
-              scale: 3.9,
+              scale:scale,
             ),
             Text('${temperature.toString()} °C')
           ],

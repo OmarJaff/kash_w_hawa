@@ -215,6 +215,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                               time: '8pm',
                               imageSource: 'images/clear-day.png',
                               temperature: 28,
+
                             ),
                             DailyTempretureTemplate(
                               time: '9pm',
