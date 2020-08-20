@@ -64,7 +64,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Icons.wb_cloudy,
               size: kbottomBarIconSize,
             ),
-            title: Text("Current weather")),
+            title: Text("Today's weather")),
         BottomNavigationBarItem(
             icon: Icon(
               Icons.ac_unit,
