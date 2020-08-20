@@ -179,7 +179,7 @@ class _LocationScreenState extends State<LocationScreen> {
                         ],
                       )),
                   SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 20),
@@ -193,8 +193,8 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(20),
-                    height: 100,
+                    margin: EdgeInsets.all(15),
+                    height: 80,
                     child: ListView(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -219,21 +219,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           imageSource: 'images/clean-night.png',
                           temperature: 25,
                         ),
-                        DailyTempretureTemplate(
-                          time: '11pm',
-                          imageSource: 'images/shower.png',
-                          temperature: 18,
-                        ),
-                        DailyTempretureTemplate(
-                          time: '12am',
-                          imageSource: 'images/thunder.png',
-                          temperature: 12,
-                        ),
-                        DailyTempretureTemplate(
-                          time: '1am',
-                          imageSource: 'images/snowy.png',
-                          temperature: -3,
-                        )
+
                       ],
                     ),
                   ),
