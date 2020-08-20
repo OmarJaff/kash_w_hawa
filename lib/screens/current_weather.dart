@@ -53,7 +53,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
           Expanded(
             flex:1,
             child: Padding(
-              padding: const EdgeInsets.only(top:12.0),
+              padding: const EdgeInsets.only(top:20.0),
               child: Row(
                 children: <Widget>[
                   Expanded(

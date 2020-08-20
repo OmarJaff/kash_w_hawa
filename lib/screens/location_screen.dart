@@ -1,6 +1,5 @@
 import 'package:KashWHawa/screens/current_weather.dart';
 import 'package:KashWHawa/utilities/constants.dart';
-import 'package:KashWHawa/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
