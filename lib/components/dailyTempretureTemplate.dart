@@ -8,19 +8,22 @@ class DailyTempretureTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 90,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(time),
-          Image.asset(
-            imageSource,
-            scale: 4.5,
-          ),
-          Text('${temperature.toString()} °C')
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(top:20, bottom: 20, left: 8),
+      child: Container(
+        width: 90,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(time),
+            Image.asset(
+              imageSource,
+              scale: 3.9,
+            ),
+            Text('${temperature.toString()} °C')
+          ],
+        ),
       ),
     );
   }
