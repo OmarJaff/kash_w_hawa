@@ -297,10 +297,10 @@ class WeatherInfoCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(7.0)),
           boxShadow: [
             BoxShadow(
-                color: kIconColor.withOpacity(0.2),
+                color: kPrimaryColor.withOpacity(0.2),
                 spreadRadius: 1,
-                blurRadius: 2,
-                offset: Offset(0, 3))
+                blurRadius: 3,
+                offset: Offset(-2, 4))
           ],
           color: Colors.white),
       padding: EdgeInsets.only(top: 25, left: 12, right: 30, bottom: 0),
