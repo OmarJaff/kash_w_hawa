@@ -11,6 +11,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+
   TempretureUnit selectedUnit = TempretureUnit.metric;
 
   @override
@@ -86,13 +87,22 @@ class _SettingsState extends State<Settings> {
             ],
           )),
           Expanded(
-            flex: 1,
+            flex:1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
                   child: Container(
-                    child: Text('langauges'),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left:20,top: 10),
+                      child: Text(
+                        'Language',
+                        style: TextStyle(
+                            color: kPrimaryColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ),
                 )
               ],
