@@ -23,23 +23,26 @@ class LanguageRadioButton extends StatelessWidget {
           ),
           margin: EdgeInsets.only(
               left: 30, right: 30, top: 50, bottom: 50),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Transform.scale(
-                scale: 2,
-                child: radioButton
-              ),
-
-              Text(
-                label,
-                style: TextStyle(
-                    color: labelColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Transform.scale(
+                  scale: 2,
+                  child: radioButton
+                ),
+                SizedBox(height: 10),
+                Text(
+                  label,
+                  style: TextStyle(
+                      color: labelColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
         ),
       ),

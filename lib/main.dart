@@ -10,7 +10,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.light().copyWith(
       primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor:Color(0xFFE5F0FC)
+          scaffoldBackgroundColor:Color(0xFFE5F0FC),
+          unselectedWidgetColor:kPrimaryColor
+
       ),
       home: LoadingScreen(),
     );

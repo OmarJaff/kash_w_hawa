@@ -132,7 +132,6 @@ class _SettingsState extends State<Settings> {
                               });
                             },
                             labelColor: selectedLanguage == Languages.english ? kActiveItemColor : kPrimaryColor,
-
                             label: 'English',
                           ),
                           LanguageRadioButton(
