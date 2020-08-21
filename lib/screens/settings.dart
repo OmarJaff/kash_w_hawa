@@ -120,6 +120,11 @@ class _SettingsState extends State<Settings> {
                               activeColor: kActiveItemColor,
                               value: Languages.english,
                               groupValue: selectedLanguage,
+                              onChanged: (v) {
+                                setState(() {
+                                  selectedLanguage =Languages.english;
+                                });
+                              },
                             ),
                             onSelect: () {
                               setState(() {
@@ -127,16 +132,22 @@ class _SettingsState extends State<Settings> {
                               });
                             },
                             labelColor: selectedLanguage == Languages.english ? kActiveItemColor : kPrimaryColor,
-                            bgColor:  selectedLanguage == Languages.english ? kActiveItemColor : Colors.white,
+
                             label: 'English',
                           ),
                           LanguageRadioButton(
                             radioButton: Radio(
                               materialTapTargetSize:
-                              MaterialTapTargetSize.padded,
+                              MaterialTapTargetSize.shrinkWrap,
                               activeColor: kActiveItemColor,
                               value: Languages.arabic,
                               groupValue: selectedLanguage,
+                              onChanged: (v) {
+                                setState(() {
+                                  selectedLanguage =Languages.arabic;
+                                });
+
+                              },
                             ),
                             onSelect: () {
                               setState(() {
@@ -144,7 +155,7 @@ class _SettingsState extends State<Settings> {
                               });
                             },
                             labelColor: selectedLanguage == Languages.arabic ? kActiveItemColor : kPrimaryColor,
-                            bgColor:  selectedLanguage == Languages.arabic ? kActiveItemColor : Colors.white,
+
                             label: 'Arabic',
                           )
                         ],

@@ -3,12 +3,12 @@ import 'package:KashWHawa/utilities/constants.dart';
 
 class LanguageRadioButton extends StatelessWidget {
 
-  LanguageRadioButton({this.onSelect, this.radioButton, this.labelColor,this.bgColor, this.label});
+  LanguageRadioButton({this.onSelect, this.radioButton, this.labelColor, this.label});
 
   final Function onSelect;
   final Radio radioButton;
   final Color labelColor;
-  final Color bgColor;
+
   final String label;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class LanguageRadioButton extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7),
             boxShadow: [BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.2 ,blurRadius: 0)],
-            color: bgColor,
+            color: Colors.white,
           ),
           margin: EdgeInsets.only(
               left: 30, right: 30, top: 50, bottom: 50),
@@ -38,7 +38,7 @@ class LanguageRadioButton extends StatelessWidget {
                 child: Text(
                   label,
                   style: TextStyle(
-                      color: kActiveItemColor,
+                      color: labelColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
