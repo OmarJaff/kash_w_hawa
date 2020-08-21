@@ -42,3 +42,4 @@ const Color kTextColor = Color(0xFF181D30);
 const Color kIconColor = Color(0xFF5E6369);
 const double  kWidthBetweenCards = 8;
 const Color kActiveItemColor = Color(0xFFFFA500);
+const Color kCustomRadioColor =Color(0xFFBAD7F7);
