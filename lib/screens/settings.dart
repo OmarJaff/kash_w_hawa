@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:KashWHawa/components/languageRadioButton.dart';
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
 import 'package:KashWHawa/components/unitRadioButton.dart';
 
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:flutter/rendering.dart';
 
 enum TempretureUnit { imperial, metric }
+enum Languages { english, arabic }
 
 class Settings extends StatefulWidget {
   @override
@@ -13,10 +16,8 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-
   TempretureUnit selectedUnit = TempretureUnit.metric;
-  String defaultLanguage = 'English';
-  List<String> languages = ['English', 'Arabic'];
+  Languages selectedLanguage = Languages.english;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,6 @@ class _SettingsState extends State<Settings> {
                       bgColor: selectedUnit == TempretureUnit.metric
                           ? kActiveItemColor
                           : Colors.white,
-
                       labelColor: selectedUnit == TempretureUnit.metric
                           ? Colors.white
                           : kPrimaryColor,
@@ -91,57 +91,65 @@ class _SettingsState extends State<Settings> {
             ],
           )),
           Expanded(
-            flex:1,
+            flex: 1,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top:25,left: 20),
-                          child: Text(
-                            'Language',
-                            style: TextStyle(
-                                color: kPrimaryColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 0, left: 20),
+                        child: Text(
+                          'Language',
+                          style: TextStyle(
+                              color: kPrimaryColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         ),
-                        Expanded(
-                          child: CustomRadioButton(
-                            unSelectedColor: Theme.of(context).canvasColor,
-                            enableShape: true,
-                            customShape: ,
-                            buttonTextStyle: ButtonTextStyle(unSelectedColor: kTextColor, textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                            buttonLables: [
-                              "English",
-                              "Arabic",
-                            ],
-
-                            buttonValues: [
-                              "English",
-                              "Arabic",
-                            ],
-                            radioButtonValue: (values) {
-                              print(values);
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          LanguageRadioButton(
+                            radioButton: Radio(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
+                              activeColor: kActiveItemColor,
+                              value: Languages.english,
+                              groupValue: selectedLanguage,
+                            ),
+                            onSelect: () {
+                              setState(() {
+                                selectedLanguage = Languages.english;
+                              });
                             },
-                            defaultSelected: "English",
-                            horizontal: true,
-
-                            // hight: 50,
-                            selectedColor: kActiveItemColor,
-                            padding: 15,
-
-                            spacing: 0.0,
-                            // enableShape: true,
+                            labelColor: selectedLanguage == Languages.english ? kActiveItemColor : kPrimaryColor,
+                            bgColor:  selectedLanguage == Languages.english ? kActiveItemColor : Colors.white,
+                            label: 'English',
                           ),
-                        ),
-                      ],
-
-                    ),
+                          LanguageRadioButton(
+                            radioButton: Radio(
+                              materialTapTargetSize:
+                              MaterialTapTargetSize.padded,
+                              activeColor: kActiveItemColor,
+                              value: Languages.arabic,
+                              groupValue: selectedLanguage,
+                            ),
+                            onSelect: () {
+                              setState(() {
+                                selectedLanguage = Languages.arabic;
+                              });
+                            },
+                            labelColor: selectedLanguage == Languages.arabic ? kActiveItemColor : kPrimaryColor,
+                            bgColor:  selectedLanguage == Languages.arabic ? kActiveItemColor : Colors.white,
+                            label: 'Arabic',
+                          )
+                        ],
+                      )
+                    ],
                   ),
                 )
               ],
