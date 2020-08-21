@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 
 class UnitRadioButton extends StatelessWidget {
   UnitRadioButton({this.bgColor = kCustomRadioColor,
-    this.shadow = const BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.5 ,blurRadius: 0) ,
+    this.shadow = const BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.2 ,blurRadius: 0) ,
     this.imageSource, this.label, this.labelColor});
   final Color bgColor;
   final BoxShadow shadow;

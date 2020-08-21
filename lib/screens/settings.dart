@@ -44,7 +44,7 @@ class _SettingsState extends State<Settings> {
                       bgColor: Color(0xFFF8AD20),
                       shadow: BoxShadow(
                           color: Colors.white,
-                          offset: Offset(0, 2),
+                          offset: Offset(0, 0),
                           spreadRadius: 0,
                           blurRadius: 0),
                       labelColor: Colors.white,
