@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
 import 'package:KashWHawa/components/unitRadioButton.dart';
 
+enum TempretureUnit { imperial, metric }
+
 class Settings extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
+  TempretureUnit selectedUnit = TempretureUnit.metric;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +35,10 @@ class _SettingsState extends State<Settings> {
                 padding: const EdgeInsets.only(left: 20, top: 10),
                 child: Text(
                   'Show Tempreture in',
-                  style: TextStyle(color: kPrimaryColor, fontSize: 20),
+                  style: TextStyle(
+                      color: kPrimaryColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
@@ -39,21 +46,39 @@ class _SettingsState extends State<Settings> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     UnitRadioButton(
+                      onSelect: () {
+                        setState(() {
+                          selectedUnit = TempretureUnit.metric;
+                        });
+                      },
                       label: 'Celsius ',
-                      imageSource: 'images/celcuis.png',
-                      bgColor: Color(0xFFF8AD20),
-                      shadow: BoxShadow(
-                          color: Colors.white,
-                          offset: Offset(0, 0),
-                          spreadRadius: 0,
-                          blurRadius: 0),
-                      labelColor: Colors.white,
+                      imageSource: selectedUnit == TempretureUnit.metric
+                          ? 'images/celcuis.png'
+                          : 'images/celcuis-default.png',
+                      bgColor: selectedUnit == TempretureUnit.metric
+                          ? kActiveItemColor
+                          : kbackgroundColor,
+
+                      labelColor: selectedUnit == TempretureUnit.metric
+                          ? Colors.white
+                          : kPrimaryColor,
                     ),
                     UnitRadioButton(
+                      onSelect: () {
+                        setState(() {
+                          selectedUnit = TempretureUnit.imperial;
+                        });
+                      },
                       label: 'Fahrenheit ',
-                      imageSource: 'images/fehreinigh-inactive.png',
-                      bgColor: kbackgroundColor,
-                      labelColor: kPrimaryColor,
+                      imageSource: selectedUnit == TempretureUnit.imperial
+                          ? 'images/fehreinigh.png'
+                          : 'images/fehreinigh-inactive.png',
+                      bgColor: selectedUnit == TempretureUnit.imperial
+                          ? kActiveItemColor
+                          : kbackgroundColor,
+                      labelColor: selectedUnit == TempretureUnit.imperial
+                          ? Colors.white
+                          : kPrimaryColor,
                     )
                   ],
                 ),
@@ -67,7 +92,6 @@ class _SettingsState extends State<Settings> {
               children: [
                 Expanded(
                   child: Container(
-                    color: Colors.grey.shade400,
                     child: Text('langauges'),
                   ),
                 )
