@@ -32,16 +32,12 @@ class LanguageRadioButton extends StatelessWidget {
                 child: radioButton
               ),
 
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 8.0),
-                child: Text(
-                  label,
-                  style: TextStyle(
-                      color: labelColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
+              Text(
+                label,
+                style: TextStyle(
+                    color: labelColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),

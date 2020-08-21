@@ -93,7 +93,7 @@ class _SettingsState extends State<Settings> {
           Expanded(
             flex: 1,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: Column(
@@ -110,13 +110,13 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+
+
                         children: [
                           LanguageRadioButton(
                             radioButton: Radio(
                               materialTapTargetSize:
-                                  MaterialTapTargetSize.padded,
+                                  MaterialTapTargetSize.shrinkWrap,
                               activeColor: kActiveItemColor,
                               value: Languages.english,
                               groupValue: selectedLanguage,
@@ -155,7 +155,6 @@ class _SettingsState extends State<Settings> {
                               });
                             },
                             labelColor: selectedLanguage == Languages.arabic ? kActiveItemColor : kPrimaryColor,
-
                             label: 'Arabic',
                           )
                         ],
