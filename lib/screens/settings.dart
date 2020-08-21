@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
-
+import 'package:KashWHawa/components/unitRadioButton.dart';
 class Settings extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
@@ -24,40 +24,16 @@ class _SettingsState extends State<Settings> {
           ),
           Expanded(
 
-              child: Row(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('Show Tempreture in'),
               Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    color: Colors.red,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('images/celcuis.png', scale: 1,),
-                        Padding(
-                          padding: const EdgeInsets.only(top:10.0,left: 20),
-                          child: Text('celsius ', style: TextStyle(color: kPrimaryColor, fontSize: 20, fontWeight: FontWeight.bold),),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.red.shade800
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('images/fehreinigh.png', scale: 1,),
-                        Padding(
-                          padding: const EdgeInsets.only(top:10.0,left: 20),
-                          child: Text('celsius ', style: TextStyle(color: kPrimaryColor, fontSize: 20, fontWeight: FontWeight.bold),),
-                        ),
-                      ],
-                    ),
-                  ),
+                  UnitRadioButton(label: 'Celsius ',imageSource: 'images/celcuis.png'),
+                  UnitRadioButton(label: 'Fahrenheit ',imageSource: 'images/fehreinigh.png')
                 ],
               ),
               ),
@@ -82,3 +58,5 @@ class _SettingsState extends State<Settings> {
     );
   }
 }
+
+
