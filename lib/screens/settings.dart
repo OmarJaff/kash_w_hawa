@@ -59,13 +59,11 @@ class _SettingsState extends State<Settings> {
                       },
                       label: 'Celsius ',
                       imageSource: selectedUnit == TempretureUnit.metric
-                          ? 'images/celcuis.png'
+                          ? 'images/celcuis-new.png'
                           : 'images/celcuis-default.png',
-                      bgColor: selectedUnit == TempretureUnit.metric
-                          ? kActiveItemColor
-                          : Colors.white,
+                      bgColor: Colors.white,
                       labelColor: selectedUnit == TempretureUnit.metric
-                          ? Colors.white
+                          ? kActiveItemColor
                           : kPrimaryColor,
                     ),
                     UnitRadioButton(
@@ -78,11 +76,9 @@ class _SettingsState extends State<Settings> {
                       imageSource: selectedUnit == TempretureUnit.imperial
                           ? 'images/fehreinigh.png'
                           : 'images/fehreinigh-inactive.png',
-                      bgColor: selectedUnit == TempretureUnit.imperial
-                          ? kActiveItemColor
-                          : Colors.white,
+                      bgColor:  Colors.white,
                       labelColor: selectedUnit == TempretureUnit.imperial
-                          ? Colors.white
+                          ? kActiveItemColor
                           : kPrimaryColor,
                     )
                   ],
