@@ -13,8 +13,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: ^0.12.2
   flutter_spinkit: ^4.1.2+1
-  group_radio_button: ^1.0.1
-  custom_radio_grouped_button: ^1.0.5
+  lottie: ^0.5.1
 
 dev_dependencies:
   flutter_test:

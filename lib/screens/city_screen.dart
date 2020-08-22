@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
+import 'package:lottie/lottie.dart';
+
 class CityScreen extends StatefulWidget {
   @override
   _CityScreenState createState() => _CityScreenState();
@@ -61,9 +63,10 @@ class _CityScreenState extends State<CityScreen> {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Column(
                   children: [
-                    Icon(Icons.location_city,size: 150,)
+                    Icon(Icons.location_city,size: 100,)
                   ],
                 ),
               ),
