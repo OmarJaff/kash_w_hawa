@@ -10,6 +10,7 @@ class _CityScreenState extends State<CityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: Container(
 
         constraints: BoxConstraints.expand(),
@@ -20,7 +21,7 @@ class _CityScreenState extends State<CityScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(top:20.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
@@ -29,12 +30,10 @@ class _CityScreenState extends State<CityScreen> {
                             Navigator.pop(context);
                           },
                           child:
-
                           Icon(
                               Icons.arrow_back,
                               size: kIconSize,
                               color: kIconColor,
-
                           ),
                         ),
                       ),
@@ -43,6 +42,10 @@ class _CityScreenState extends State<CityScreen> {
                         child: Container(
                             margin: EdgeInsets.only(right: 20),
                           child: TextField(
+                            onSubmitted: (val) {
+                              print(val);
+                            },
+                            autofocus: true,
                             style: TextStyle(
                                 color: Colors.black
                             ),
@@ -57,16 +60,22 @@ class _CityScreenState extends State<CityScreen> {
                   ),
                 ),
               ),
-
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context,cityName);
-                },
-                child: Text(
-                  'Get Weather',
-                  style: kButtonTextStyle,
+              Expanded(
+                child: Column(
+                  children: [
+                    Icon(Icons.location_city,size: 150,)
+                  ],
                 ),
               ),
+//              FlatButton(
+//                onPressed: () {
+//                  Navigator.pop(context,cityName);
+//                },
+//                child: Text(
+//                  'Get Weather',
+//                  style: kButtonTextStyle,
+//                ),
+//              ),
             ],
           ),
         ),
