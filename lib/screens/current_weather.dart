@@ -150,37 +150,38 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                     child: ListView(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
                       children: [
-                        WeatherInfoCard(
-                          label: 'wind',
-                          value: 7,
-                          symbol: 'mph',
+                        Container(
+                          margin: EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            children: [
+                              WeatherInfoCard(
+                                label: 'wind',
+                                value: 7,
+                                symbol: 'mph',
+                              ),
+
+                              WeatherInfoCard(
+                                label: 'Humidity',
+                                value: 55,
+                                symbol: '%',
+                              ),
+
+                              WeatherInfoCard(
+                                label: 'Rain',
+                                value: 10,
+                                symbol: '%',
+                              ),
+
+                              WeatherInfoCard(
+                                label: 'Feels Like',
+                                value: 5,
+                                symbol: '°C',
+                              )
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          width: kWidthBetweenCards,
-                        ),
-                        WeatherInfoCard(
-                          label: 'Humidity',
-                          value: 55,
-                          symbol: '%',
-                        ),
-                        SizedBox(
-                          width: kWidthBetweenCards,
-                        ),
-                        WeatherInfoCard(
-                          label: 'Rain',
-                          value: 10,
-                          symbol: '%',
-                        ),
-                        SizedBox(
-                          width: kWidthBetweenCards,
-                        ),
-                        WeatherInfoCard(
-                          label: 'Feels Like',
-                          value: 5,
-                          symbol: '°C',
-                        )
+
                       ],
                     )),
 
