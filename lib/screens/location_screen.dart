@@ -50,6 +50,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       bottomNavigationBar: 
       BottomNavigationBar(
         currentIndex: _pageIndex,
