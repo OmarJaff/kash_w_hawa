@@ -23,7 +23,7 @@ class UnitRadioButton extends StatelessWidget {
             boxShadow: [shadow],
             color: bgColor,
           ),
-          margin: EdgeInsets.only(left: 30,right: 30, top: 50,bottom: 50),
+          margin: EdgeInsets.only(left: 30,right: 30, top: 20,bottom: 80),
 
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

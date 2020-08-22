@@ -55,7 +55,7 @@ class _SettingsState extends State<Settings> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20, top: 10),
+                padding: const EdgeInsets.only(left: 28, top: 15),
                 child: Text(
                   'Show Tempreture in',
                   style: TextStyle(
@@ -66,7 +66,7 @@ class _SettingsState extends State<Settings> {
               ),
               Expanded(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                   children: [
                     UnitRadioButton(
                         onSelect: () {
@@ -134,7 +134,7 @@ class _SettingsState extends State<Settings> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 0, left: 20),
+                        padding: const EdgeInsets.only(top: 0, left: 28),
                         child: Text(
                           'Language',
                           style: TextStyle(
@@ -193,7 +193,9 @@ class _SettingsState extends State<Settings> {
                           )
                         ],
                       ),
-                      DeveloperInfoText(tapGestureRecognizer: _tapGestureRecognizer)
+                      Expanded(
+                        child: DeveloperInfoText(tapGestureRecognizer: _tapGestureRecognizer),
+                      )
                     ],
                   ),
                 )
