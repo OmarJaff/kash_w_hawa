@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:KashWHawa/components/languageRadioButton.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
 import 'package:KashWHawa/components/unitRadioButton.dart';
 import 'package:flutter/rendering.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum TempretureUnit { imperial, metric }
 enum Languages { english, arabic }
@@ -16,6 +18,22 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   TempretureUnit selectedUnit = TempretureUnit.metric;
   Languages selectedLanguage = Languages.english;
+  TapGestureRecognizer _tapGestureRecognizer;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tapGestureRecognizer = TapGestureRecognizer()
+    ..onTap = () => launch('https://www.omarjaff.com');
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _tapGestureRecognizer.dispose();
+    super.dispose();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +68,30 @@ class _SettingsState extends State<Settings> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     UnitRadioButton(
-                      onSelect: () {
-                        setState(() {
-                          selectedUnit = TempretureUnit.metric;
-                        });
-                      },
-                      label: 'Celsius ',
-                      imageSource: selectedUnit == TempretureUnit.metric
-                          ? 'assets/images/celcuis-new.png'
-                          : 'assets/images/celcuis-default.png',
-                      bgColor: Colors.white,
-                      labelColor: selectedUnit == TempretureUnit.metric
-                          ? kActiveItemColor
-                          : kPrimaryColor,
-                        shadow: selectedUnit == TempretureUnit.metric ? BoxShadow(color: kPrimaryColor, offset: Offset(0,0),spreadRadius:0.0 ,blurRadius: 0) : BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.2 ,blurRadius: 0)
-                    ),
+                        onSelect: () {
+                          setState(() {
+                            selectedUnit = TempretureUnit.metric;
+                          });
+                        },
+                        label: 'Celsius ',
+                        imageSource: selectedUnit == TempretureUnit.metric
+                            ? 'assets/images/celcuis-new.png'
+                            : 'assets/images/celcuis-default.png',
+                        bgColor: Colors.white,
+                        labelColor: selectedUnit == TempretureUnit.metric
+                            ? kActiveItemColor
+                            : kPrimaryColor,
+                        shadow: selectedUnit == TempretureUnit.metric
+                            ? BoxShadow(
+                                color: kPrimaryColor,
+                                offset: Offset(0, 0),
+                                spreadRadius: 0.0,
+                                blurRadius: 0)
+                            : BoxShadow(
+                                color: kPrimaryColor,
+                                offset: Offset(0, 1),
+                                spreadRadius: 0.2,
+                                blurRadius: 0)),
                     UnitRadioButton(
                       onSelect: () {
                         setState(() {
@@ -75,11 +102,21 @@ class _SettingsState extends State<Settings> {
                       imageSource: selectedUnit == TempretureUnit.imperial
                           ? 'assets/images/fehreinigh.png'
                           : 'assets/images/fehreinigh-inactive.png',
-                      bgColor:  Colors.white,
+                      bgColor: Colors.white,
                       labelColor: selectedUnit == TempretureUnit.imperial
                           ? kActiveItemColor
                           : kPrimaryColor,
-                      shadow: selectedUnit == TempretureUnit.imperial ? BoxShadow(color: kPrimaryColor, offset: Offset(0,0),spreadRadius:0.0 ,blurRadius: 0) : BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.2 ,blurRadius: 0),
+                      shadow: selectedUnit == TempretureUnit.imperial
+                          ? BoxShadow(
+                              color: kPrimaryColor,
+                              offset: Offset(0, 0),
+                              spreadRadius: 0.0,
+                              blurRadius: 0)
+                          : BoxShadow(
+                              color: kPrimaryColor,
+                              offset: Offset(0, 1),
+                              spreadRadius: 0.2,
+                              blurRadius: 0),
                     )
                   ],
                 ),
@@ -106,8 +143,6 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                       Row(
-
-
                         children: [
                           LanguageRadioButton(
                             radioButton: Radio(
@@ -118,7 +153,7 @@ class _SettingsState extends State<Settings> {
                               groupValue: selectedLanguage,
                               onChanged: (v) {
                                 setState(() {
-                                  selectedLanguage =Languages.english;
+                                  selectedLanguage = Languages.english;
                                 });
                               },
                             ),
@@ -127,21 +162,22 @@ class _SettingsState extends State<Settings> {
                                 selectedLanguage = Languages.english;
                               });
                             },
-                            labelColor: selectedLanguage == Languages.english ? kActiveItemColor : kPrimaryColor,
+                            labelColor: selectedLanguage == Languages.english
+                                ? kActiveItemColor
+                                : kPrimaryColor,
                             label: 'English',
                           ),
                           LanguageRadioButton(
                             radioButton: Radio(
                               materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
+                                  MaterialTapTargetSize.shrinkWrap,
                               activeColor: kActiveItemColor,
                               value: Languages.arabic,
                               groupValue: selectedLanguage,
                               onChanged: (v) {
                                 setState(() {
-                                  selectedLanguage =Languages.arabic;
+                                  selectedLanguage = Languages.arabic;
                                 });
-
                               },
                             ),
                             onSelect: () {
@@ -149,11 +185,26 @@ class _SettingsState extends State<Settings> {
                                 selectedLanguage = Languages.arabic;
                               });
                             },
-                            labelColor: selectedLanguage == Languages.arabic ? kActiveItemColor : kPrimaryColor,
+                            labelColor: selectedLanguage == Languages.arabic
+                                ? kActiveItemColor
+                                : kPrimaryColor,
                             label: 'Arabic',
                           )
                         ],
-                      )
+                      ),
+                      Center(
+                          child: RichText(
+                        text: TextSpan(
+                            style: TextStyle(color: kPrimaryColor),
+                            children: <TextSpan>[
+                              TextSpan(text: 'Developed by '),
+                               TextSpan(
+                                text: 'Omar S. Jaff',
+                                style: TextStyle(color: Colors.blue.shade400),
+                                recognizer: _tapGestureRecognizer,
+                              ),
+                            ]),
+                      ))
                     ],
                   ),
                 )
