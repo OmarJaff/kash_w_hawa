@@ -19,12 +19,7 @@ class _CityScreenState extends State<CityScreen> {
 
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
 
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

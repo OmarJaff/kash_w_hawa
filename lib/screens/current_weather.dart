@@ -129,7 +129,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '27',
+                        '28',
                         style: TextStyle(color: kTextColor, fontSize: 80),
                       ),
                       Container(
@@ -147,44 +147,41 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                 ),
                 Expanded(
                     flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 15,right: 15),
-                      child: ListView(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        children: [
-                          WeatherInfoCard(
-                            label: 'wind',
-                            value: 7,
-                            symbol: 'mph',
-                          ),
-                          SizedBox(
-                            width: kWidthBetweenCards,
-                          ),
-                          WeatherInfoCard(
-                            label: 'Humidity',
-                            value: 55,
-                            symbol: '%',
-                          ),
-                          SizedBox(
-                            width: kWidthBetweenCards,
-                          ),
-                          WeatherInfoCard(
-                            label: 'Rain',
-                            value: 10,
-                            symbol: '%',
-                          ),
-                          SizedBox(
-                            width: kWidthBetweenCards,
-                          ),
-                          WeatherInfoCard(
-                            label: 'Feels Like',
-                            value: 5,
-                            symbol: '°C',
-                          )
-                        ],
-                      ),
+                    child: ListView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      children: [
+                        WeatherInfoCard(
+                          label: 'wind',
+                          value: 7,
+                          symbol: 'mph',
+                        ),
+                        SizedBox(
+                          width: kWidthBetweenCards,
+                        ),
+                        WeatherInfoCard(
+                          label: 'Humidity',
+                          value: 55,
+                          symbol: '%',
+                        ),
+                        SizedBox(
+                          width: kWidthBetweenCards,
+                        ),
+                        WeatherInfoCard(
+                          label: 'Rain',
+                          value: 10,
+                          symbol: '%',
+                        ),
+                        SizedBox(
+                          width: kWidthBetweenCards,
+                        ),
+                        WeatherInfoCard(
+                          label: 'Feels Like',
+                          value: 5,
+                          symbol: '°C',
+                        )
+                      ],
                     )),
 
                 Expanded(
