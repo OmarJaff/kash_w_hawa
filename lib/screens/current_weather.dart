@@ -116,7 +116,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                 Expanded(
                   flex:2,
                     child: Image.asset(
-                  'images/clear-day.png',
+                  'assets/images/clear-day.png',
                       scale: 1,
                 )),
                 
@@ -209,38 +209,38 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                           children: [
                             DailyTempretureTemplate(
                               time: '8pm',
-                              imageSource: 'images/clear-day.png',
+                              imageSource: 'assets/images/clear-day.png',
                               temperature: 28,
 
                             ),
                             DailyTempretureTemplate(
                               time: '9pm',
-                              imageSource: 'images/broken-clouds.png',
+                              imageSource: 'assets/images/broken-clouds.png',
                               temperature: 27,
                             ),
                             DailyTempretureTemplate(
                               time: '10pm',
-                              imageSource: 'images/scattered-clouds.png',
+                              imageSource: 'assets/images/scattered-clouds.png',
                               temperature: 29,
                             ),
                             DailyTempretureTemplate(
                               time: '8pm',
-                              imageSource: 'images/clean-night.png',
+                              imageSource: 'assets/images/clean-night.png',
                               temperature: 25,
                             ),
                             DailyTempretureTemplate(
                               time: '8pm',
-                              imageSource: 'images/clean-night.png',
+                              imageSource: 'assets/images/clean-night.png',
                               temperature: 25,
                             ),
                             DailyTempretureTemplate(
                               time: '8pm',
-                              imageSource: 'images/clean-night.png',
+                              imageSource: 'assets/images/clean-night.png',
                               temperature: 25,
                             ),
                             DailyTempretureTemplate(
                               time: '8pm',
-                              imageSource: 'images/clean-night.png',
+                              imageSource: 'assets/images/clean-night.png',
                               temperature: 25,
                             ),
                           ],

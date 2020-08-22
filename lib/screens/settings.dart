@@ -57,8 +57,8 @@ class _SettingsState extends State<Settings> {
                       },
                       label: 'Celsius ',
                       imageSource: selectedUnit == TempretureUnit.metric
-                          ? 'images/celcuis-new.png'
-                          : 'images/celcuis-default.png',
+                          ? 'assets/images/celcuis-new.png'
+                          : 'assets/images/celcuis-default.png',
                       bgColor: Colors.white,
                       labelColor: selectedUnit == TempretureUnit.metric
                           ? kActiveItemColor
@@ -73,8 +73,8 @@ class _SettingsState extends State<Settings> {
                       },
                       label: 'Fahrenheit ',
                       imageSource: selectedUnit == TempretureUnit.imperial
-                          ? 'images/fehreinigh.png'
-                          : 'images/fehreinigh-inactive.png',
+                          ? 'assets/images/fehreinigh.png'
+                          : 'assets/images/fehreinigh-inactive.png',
                       bgColor:  Colors.white,
                       labelColor: selectedUnit == TempretureUnit.imperial
                           ? kActiveItemColor

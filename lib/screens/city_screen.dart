@@ -8,7 +8,24 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+
+  AnimationController _controller;
   String cityName;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,10 +80,11 @@ class _CityScreenState extends State<CityScreen> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 6,
                 child: Column(
                   children: [
-                    Icon(Icons.location_city,size: 100,)
+                    Lottie.asset('assets/animations/location_search_animation.json',
+                    )
                   ],
                 ),
               ),
