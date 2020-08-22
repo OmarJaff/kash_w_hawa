@@ -11,40 +11,53 @@ class _CityScreenState extends State<CityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/city_background.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
+
         constraints: BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
             children: <Widget>[
-              Align(
-                alignment: Alignment.topLeft,
-                child: FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    size: 50.0,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(top:20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child:
+
+                          Icon(
+                              Icons.arrow_back,
+                              size: kIconSize,
+                              color: kIconColor,
+
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                          flex: 5,
+                        child: Container(
+                            margin: EdgeInsets.only(right: 20),
+                          child: TextField(
+                            style: TextStyle(
+                                color: Colors.black
+                            ),
+                            decoration: kInputDecorations,
+                            onChanged: (value) {
+                              cityName = value;
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(20.0),
-                child: TextField(
-                  style: TextStyle(
-                    color: Colors.black
-                  ),
-                  decoration: kInputDecorations,
-                  onChanged: (value) {
-                    cityName = value;
-                  },
-                ),
-              ),
+
               FlatButton(
                 onPressed: () {
                   Navigator.pop(context,cityName);

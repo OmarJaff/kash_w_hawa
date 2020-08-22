@@ -22,12 +22,9 @@ const kConditionTextStyle = TextStyle(
 const kInputDecorations = InputDecoration(
     filled: true,
     fillColor: Colors.white,
-    icon: Icon(
-      Icons.location_city,
-      color: Colors.white,
-    ),
+
     hintText: 'Type city Name',
-    hintStyle: TextStyle(color: Colors.grey),
+    hintStyle: TextStyle(color: kPrimaryColor),
     border: OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(10),
