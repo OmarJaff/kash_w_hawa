@@ -6,6 +6,7 @@ import 'package:KashWHawa/utilities/constants.dart';
 import 'package:KashWHawa/components/unitRadioButton.dart';
 import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:KashWHawa/components/developerNameString.dart';
 
 enum TempretureUnit { imperial, metric }
 enum Languages { english, arabic }
@@ -192,19 +193,7 @@ class _SettingsState extends State<Settings> {
                           )
                         ],
                       ),
-                      Center(
-                          child: RichText(
-                        text: TextSpan(
-                            style: TextStyle(color: kPrimaryColor),
-                            children: <TextSpan>[
-                              TextSpan(text: 'Developed by '),
-                               TextSpan(
-                                text: 'Omar S. Jaff',
-                                style: TextStyle(color: Colors.blue.shade400),
-                                recognizer: _tapGestureRecognizer,
-                              ),
-                            ]),
-                      ))
+                      DeveloperInfoText(tapGestureRecognizer: _tapGestureRecognizer)
                     ],
                   ),
                 )
@@ -216,3 +205,5 @@ class _SettingsState extends State<Settings> {
     );
   }
 }
+
+
