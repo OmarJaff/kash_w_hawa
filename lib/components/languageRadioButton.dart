@@ -18,7 +18,11 @@ class LanguageRadioButton extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(7),
-            boxShadow: [BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.2 ,blurRadius: 0)],
+            boxShadow: [ BoxShadow(
+                color: kPrimaryColor.withOpacity(0.2),
+                spreadRadius: 0.4,
+                blurRadius: 1,
+                offset: Offset(-2, 4))],
             color: Colors.white,
           ),
           margin: EdgeInsets.only(

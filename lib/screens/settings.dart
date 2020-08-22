@@ -65,6 +65,7 @@ class _SettingsState extends State<Settings> {
                       labelColor: selectedUnit == TempretureUnit.metric
                           ? kActiveItemColor
                           : kPrimaryColor,
+                        shadow: selectedUnit == TempretureUnit.metric ? BoxShadow(color: kPrimaryColor, offset: Offset(0,0),spreadRadius:0.0 ,blurRadius: 0) : BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.2 ,blurRadius: 0)
                     ),
                     UnitRadioButton(
                       onSelect: () {
@@ -80,6 +81,7 @@ class _SettingsState extends State<Settings> {
                       labelColor: selectedUnit == TempretureUnit.imperial
                           ? kActiveItemColor
                           : kPrimaryColor,
+                      shadow: selectedUnit == TempretureUnit.imperial ? BoxShadow(color: kPrimaryColor, offset: Offset(0,0),spreadRadius:0.0 ,blurRadius: 0) : BoxShadow(color: kPrimaryColor, offset: Offset(0,1),spreadRadius:0.2 ,blurRadius: 0),
                     )
                   ],
                 ),
