@@ -5,7 +5,7 @@ import '../utilities/constants.dart';
 class WeatherInfoCard extends StatelessWidget {
   WeatherInfoCard({@required this.label, @required this.value, this.symbol});
   final String label;
-  final double value;
+  final dynamic value;
   final String symbol;
 
   @override

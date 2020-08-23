@@ -7,26 +7,52 @@ import 'package:flutter/cupertino.dart';
 import '../services/weather.dart';
 import 'package:flutter/widgets.dart';
 import 'package:KashWHawa/components/mainAppTitle.dart';
+import 'package:intl/intl.dart';
+
+
 
 
 class CurrentWeather extends StatefulWidget {
-  CurrentWeather({this.weatherData});
-  final dynamic weatherData;
+  
+//  CurrentWeather({this.weatherData});
+//  final dynamic weatherData;
+
   @override
   _CurrentWeatherState createState() => _CurrentWeatherState();
 }
 
 class _CurrentWeatherState extends State<CurrentWeather> {
   WeatherModel weather = WeatherModel();
-  var tempreture;
-  String weatherDescription;
+
+  int tempreture;
+  var weatherDescription;
+  var windSpeed;
+  var humidity;
+  var feelLike;
+  var timeZone;
   String weatherIcon;
   String cityName;
+  DateTime dateToday = DateTime.now();
+
+  dynamic _weatherData;
+  List <dynamic> dailyWeatherData;
+
+  String getTodayDay() {
+    return DateFormat('EEEE').format(dateToday);
+  }
+
+  Future<dynamic> getData( ) async{
+     _weatherData = await WeatherModel().getCurrentLocationWeather();
+     updateUI(_weatherData);
+
+  }
+
+
   @override
-  void initState() {
+  void initState(){
+      getData();
     // TODO: implement initState
     super.initState();
-    updateUI(widget.weatherData);
   }
 
   void updateUI(dynamic weatherData) {
@@ -37,12 +63,21 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       cityName = '';
       return;
     }
+
     setState(() {
-      tempreture = weatherData['main']['temp'];
-      var condition = weatherData['weather'][0]['id'];
-      weatherIcon = weather.getWeatherIcon(condition);
+
+      dailyWeatherData = weatherData['hourly'];
+      tempreture = weatherData['current']['temp'].toInt();
+
+      weatherDescription = weatherData['current']['weather'][0]['description'];
+
+      windSpeed = weatherData['current']['wind_speed'];
+      humidity = weatherData['current']['humidity'];
+      timeZone = weatherData['timezone'];
+      feelLike = weatherData['current']['feels_like'].toInt();
+//      weatherIcon = weather.getWeatherIcon(condition);
       cityName = weatherData['name'];
-      weatherDescription = weather.getMessage(tempreture.toInt());
+
     });
   }
 
@@ -76,7 +111,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                       children: <Widget>[
                         MainAppTitleName(),
                         SizedBox(height: 4),
-                        Text('Erbil, Iraq')
+                        Text(timeZone.toString())
                       ],
                     ),
                   ),
@@ -122,14 +157,14 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                 
                 Padding(
                     padding: EdgeInsets.only(top:10),
-                    child: Text('Clean day')),
+                    child: Text(weatherDescription.toString())),
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '28',
+                        tempreture.toString(),
                         style: TextStyle(color: kTextColor, fontSize: 80),
                       ),
                       Container(
@@ -157,25 +192,19 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                             children: [
                               WeatherInfoCard(
                                 label: 'wind',
-                                value: 7,
+                                value: windSpeed,
                                 symbol: 'mph',
                               ),
 
                               WeatherInfoCard(
                                 label: 'Humidity',
-                                value: 55,
-                                symbol: '%',
-                              ),
-
-                              WeatherInfoCard(
-                                label: 'Rain',
-                                value: 10,
+                                value: humidity,
                                 symbol: '%',
                               ),
 
                               WeatherInfoCard(
                                 label: 'Feels Like',
-                                value: 5,
+                                value: feelLike,
                                 symbol: '°C',
                               )
                             ],
@@ -193,7 +222,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                         margin: EdgeInsets.only(left: 15, top: 15),
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'Wednesday, Today',
+                          '${getTodayDay()}, Today',
                           style: TextStyle(
                               color: kTextColor,
                               fontSize: 16,
@@ -205,42 +234,11 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           children: [
-                            DailyTempretureTemplate(
-                              time: '8pm',
-                              imageSource: 'assets/images/clear-day.png',
-                              temperature: 28,
-
-                            ),
-                            DailyTempretureTemplate(
-                              time: '9pm',
-                              imageSource: 'assets/images/broken-clouds.png',
-                              temperature: 27,
-                            ),
-                            DailyTempretureTemplate(
-                              time: '10pm',
-                              imageSource: 'assets/images/scattered-clouds.png',
-                              temperature: 29,
-                            ),
-                            DailyTempretureTemplate(
-                              time: '8pm',
-                              imageSource: 'assets/images/clean-night.png',
-                              temperature: 25,
-                            ),
-                            DailyTempretureTemplate(
-                              time: '8pm',
-                              imageSource: 'assets/images/clean-night.png',
-                              temperature: 25,
-                            ),
-                            DailyTempretureTemplate(
-                              time: '8pm',
-                              imageSource: 'assets/images/clean-night.png',
-                              temperature: 25,
-                            ),
-                            DailyTempretureTemplate(
-                              time: '8pm',
-                              imageSource: 'assets/images/clean-night.png',
-                              temperature: 25,
-                            ),
+                              for(var data in dailyWeatherData)   DailyTempretureTemplate(
+                                time:  DateFormat().add_j().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
+                                imageSource: 'assets/images/clean-night.png',
+                                temperature: data['temp'].toInt(),
+                              )
                           ],
                         ),
                       ),
@@ -255,5 +253,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
     );
   }
 }
+
+//DateFormat.jm().format(DateTime(data['dt'])).toString()
 
 
