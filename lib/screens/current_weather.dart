@@ -64,20 +64,27 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       return;
     }
 
-    setState(() {
+//    if(weatherData['name']) {
+//      setState(() {
+//        tempreture = weatherData['main']['temp'].toInt();
+//        weatherDescription = weatherData['weather'][0]['description'];
+//        windSpeed = weatherData['wind']['speed'];
+//        humidity = weatherData['main']['humidity'];
+//        weatherConditionImageSource = weatherData['current']['weather'][0]['icon'];
+//        return;
+//      });
+//    }
 
+    setState(() {
       dailyWeatherData = weatherData['hourly'];
       tempreture = weatherData['current']['temp'].toInt();
-
       weatherDescription = weatherData['current']['weather'][0]['description'];
-
       windSpeed = weatherData['current']['wind_speed'];
       humidity = weatherData['current']['humidity'];
       timeZone = weatherData['timezone'];
       feelLike = weatherData['current']['feels_like'].toInt();
       cityName = weatherData['name'];
       weatherConditionImageSource = weatherData['current']['weather'][0]['icon'];
-
     });
   }
 
@@ -125,8 +132,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                               MaterialPageRoute(builder: (context) => CityScreen()),
                             );
                             if (typedName != null) {
-                              var weatherData =
-                              await weather.getCityWeather(typedName);
+                              var weatherData = await weather.getCityWeather(typedName);
                               updateUI(weatherData);
                             }
                           },
@@ -234,7 +240,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           children: [
-                              for(var data in dailyWeatherData)   DailyTempretureTemplate(
+                            for(var data in dailyWeatherData)   DailyTempretureTemplate(
                                 time:  DateFormat().add_j().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
                                 imageSource: weather.getWeatherImage(data['weather'][0]['icon']),
                                 temperature: data['temp'].toInt(),

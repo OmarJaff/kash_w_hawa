@@ -56,8 +56,8 @@ class _CityScreenState extends State<CityScreen> {
                         child: Container(
                             margin: EdgeInsets.only(right: 20),
                           child: TextField(
-                            onSubmitted: (val) {
-                              print(val);
+                            onSubmitted: (cityName) {
+                              Navigator.pop(context, cityName);
                             },
                             autofocus: true,
                             style: TextStyle(

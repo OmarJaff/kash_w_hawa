@@ -13,7 +13,7 @@ class WeatherModel {
     NetworkingHelper networkingHelper = NetworkingHelper(
         '$searchByCityURI?q=$cityName&appid=$apiKey&lang=$language&units=$unit');
     var weatherData = await networkingHelper.getData();
-//    return weatherData;
+    return weatherData;
   }
 
   Future<dynamic> getCurrentLocationWeather() async {
