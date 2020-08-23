@@ -30,6 +30,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   var humidity;
   var feelLike;
   var timeZone;
+  String weatherConditionImageSource;
   String weatherIcon;
   String cityName;
   DateTime dateToday = DateTime.now();
@@ -44,7 +45,6 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   Future<dynamic> getData( ) async{
      _weatherData = await WeatherModel().getCurrentLocationWeather();
      updateUI(_weatherData);
-
   }
 
 
@@ -75,8 +75,8 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       humidity = weatherData['current']['humidity'];
       timeZone = weatherData['timezone'];
       feelLike = weatherData['current']['feels_like'].toInt();
-//      weatherIcon = weather.getWeatherIcon(condition);
       cityName = weatherData['name'];
+      weatherConditionImageSource = weatherData['current']['weather'][0]['icon'];
 
     });
   }
@@ -151,7 +151,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                 Expanded(
                   flex:2,
                     child: Image.asset(
-                  'assets/images/clear-day.png',
+                  weather.getWeatherImage(weatherConditionImageSource),
                       scale: 1,
                 )),
                 
@@ -236,7 +236,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                           children: [
                               for(var data in dailyWeatherData)   DailyTempretureTemplate(
                                 time:  DateFormat().add_j().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
-                                imageSource: 'assets/images/clean-night.png',
+                                imageSource: weather.getWeatherImage(data['weather'][0]['icon']),
                                 temperature: data['temp'].toInt(),
                               )
                           ],
