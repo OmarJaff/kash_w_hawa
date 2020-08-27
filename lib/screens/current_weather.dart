@@ -8,7 +8,7 @@ import '../services/weather.dart';
 import 'package:flutter/widgets.dart';
 import 'package:KashWHawa/components/mainAppTitle.dart';
 import 'package:intl/intl.dart';
-
+import 'package:KashWHawa/screens/loading_screen.dart';
 
 
 
@@ -62,16 +62,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       return;
     }
 
-//    if(weatherData['name']) {
-//      setState(() {
-//        tempreture = weatherData['main']['temp'].toInt();
-//        weatherDescription = weatherData['weather'][0]['description'];
-//        windSpeed = weatherData['wind']['speed'];
-//        humidity = weatherData['main']['humidity'];
-//        weatherConditionImageSource = weatherData['current']['weather'][0]['icon'];
-//        return;
-//      });
-//    }
+
     setState(() {
       hourlyWeatherData = weatherData['hourly'];
       tempreture = weatherData['current']['temp'].toInt();
@@ -103,7 +94,13 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                   Expanded(
                     child: Column(children: [
                       FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return LoadingScreen();
+                            }));
+                          });
+                        },
                         child: Icon(
                           Icons.location_on,
                           color: kIconColor,

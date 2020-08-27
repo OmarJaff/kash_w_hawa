@@ -14,7 +14,7 @@ class DailyTempretureTemplate extends StatelessWidget {
         width: 90,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(time),
             Image.asset(
