@@ -25,20 +25,18 @@ class WeatherInfoCard extends StatelessWidget {
           color: Colors.white),
       padding: EdgeInsets.only(top: 25, left: 12, right: 12, bottom: 0),
 
-      child: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(this.label),
-            SizedBox(
-              height: 4,
-            ),
-            Text(
-              '$value $symbol',
-              style: TextStyle(fontWeight: FontWeight.bold, color: kTextColor),
-            )
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(this.label),
+          SizedBox(
+            height: 4,
+          ),
+          Text(
+            '$value $symbol',
+            style: TextStyle(fontWeight: FontWeight.bold, color: kTextColor),
+          )
+        ],
       ),
     );
   }
