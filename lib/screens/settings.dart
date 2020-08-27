@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:KashWHawa/components/languageRadioButton.dart';
+import 'package:KashWHawa/components/customizedRadioButton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:KashWHawa/components/developerNameString.dart';
 
-enum TempretureUnit { imperial, metric }
+enum TempretureUnits { imperial, metric }
 enum Languages { english, arabic }
 
 class Settings extends StatefulWidget {
@@ -17,7 +17,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  TempretureUnit selectedUnit = TempretureUnit.metric;
+  TempretureUnits selectedUnit = TempretureUnits.metric;
   Languages selectedLanguage = Languages.english;
   TapGestureRecognizer _tapGestureRecognizer;
   @override
@@ -42,8 +42,9 @@ class _SettingsState extends State<Settings> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+          Container(
+            padding: const EdgeInsets.all(25.0),
+
             child: Text(
               'Settings',
               style: TextStyle(
@@ -51,6 +52,7 @@ class _SettingsState extends State<Settings> {
             ),
           ),
           Expanded(
+            flex: 1,
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -64,62 +66,59 @@ class _SettingsState extends State<Settings> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              Expanded(
-                child: Row(
-
-                  children: [
-                    UnitRadioButton(
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8, top: 8),
+                child: Expanded(
+                  child: Row(
+                    children: [
+                      CustomizedRadioButton(
+                        radioButton: Radio(
+                          materialTapTargetSize:
+                          MaterialTapTargetSize.shrinkWrap,
+                          activeColor: kActiveItemColor,
+                          value: TempretureUnits.metric,
+                          groupValue: selectedUnit,
+                          onChanged: (v) {
+                            setState(() {
+                              selectedUnit = TempretureUnits.metric;
+                            });
+                          },
+                        ),
                         onSelect: () {
                           setState(() {
-                            selectedUnit = TempretureUnit.metric;
+                            selectedUnit = TempretureUnits.metric;
                           });
                         },
-                        label: 'Celsius ',
-                        imageSource: selectedUnit == TempretureUnit.metric
-                            ? 'assets/images/celcuis-new.png'
-                            : 'assets/images/celcuis-default.png',
-                        bgColor: Colors.white,
-                        labelColor: selectedUnit == TempretureUnit.metric
+                        labelColor: selectedUnit == TempretureUnits.metric
                             ? kActiveItemColor
                             : kPrimaryColor,
-                        shadow: selectedUnit == TempretureUnit.metric
-                            ? BoxShadow(
-                                color: kPrimaryColor,
-                                offset: Offset(0, 0),
-                                spreadRadius: 0.0,
-                                blurRadius: 0)
-                            : BoxShadow(
-                                color: kPrimaryColor,
-                                offset: Offset(0, 1),
-                                spreadRadius: 0.2,
-                                blurRadius: 0)),
-                    UnitRadioButton(
-                      onSelect: () {
-                        setState(() {
-                          selectedUnit = TempretureUnit.imperial;
-                        });
-                      },
-                      label: 'Fahrenheit ',
-                      imageSource: selectedUnit == TempretureUnit.imperial
-                          ? 'assets/images/fehreinigh.png'
-                          : 'assets/images/fehreinigh-inactive.png',
-                      bgColor: Colors.white,
-                      labelColor: selectedUnit == TempretureUnit.imperial
-                          ? kActiveItemColor
-                          : kPrimaryColor,
-                      shadow: selectedUnit == TempretureUnit.imperial
-                          ? BoxShadow(
-                              color: kPrimaryColor,
-                              offset: Offset(0, 0),
-                              spreadRadius: 0.0,
-                              blurRadius: 0)
-                          : BoxShadow(
-                              color: kPrimaryColor,
-                              offset: Offset(0, 1),
-                              spreadRadius: 0.2,
-                              blurRadius: 0),
-                    )
-                  ],
+                        label: 'Celsius',
+                      ),
+                      CustomizedRadioButton(
+                        radioButton: Radio(
+                          materialTapTargetSize:
+                          MaterialTapTargetSize.shrinkWrap,
+                          activeColor: kActiveItemColor,
+                          value: TempretureUnits.imperial,
+                          groupValue: selectedUnit,
+                          onChanged: (v) {
+                            setState(() {
+                              selectedUnit = TempretureUnits.imperial;
+                            });
+                          },
+                        ),
+                        onSelect: () {
+                          setState(() {
+                            selectedUnit = TempretureUnits.imperial;
+                          });
+                        },
+                        labelColor: selectedUnit == TempretureUnits.imperial
+                            ? kActiveItemColor
+                            : kPrimaryColor,
+                        label: 'Fahrenheit',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -145,7 +144,7 @@ class _SettingsState extends State<Settings> {
                       ),
                       Row(
                         children: [
-                          LanguageRadioButton(
+                          CustomizedRadioButton(
                             radioButton: Radio(
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
@@ -168,7 +167,7 @@ class _SettingsState extends State<Settings> {
                                 : kPrimaryColor,
                             label: 'English',
                           ),
-                          LanguageRadioButton(
+                          CustomizedRadioButton(
                             radioButton: Radio(
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,

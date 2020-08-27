@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
 
-class LanguageRadioButton extends StatelessWidget {
+class CustomizedRadioButton extends StatelessWidget {
 
-  LanguageRadioButton({this.onSelect, this.radioButton, this.labelColor, this.label});
+  CustomizedRadioButton({this.onSelect, this.radioButton, this.labelColor, this.label});
 
   final Function onSelect;
   final Radio radioButton;
