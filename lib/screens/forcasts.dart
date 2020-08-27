@@ -59,7 +59,7 @@ class _ForcastsState extends State<Forcasts> {
                     day: DateFormat().add_EEEE().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
                     status: data['weather'][0]['description'],
                     imageSource: weather.getWeatherImage(data['weather'][0]['icon']),
-                    tempreture: '29°C'),
+                    tempreture: data['temp']['day'].toInt()                  ),
 
               ],
             ),

@@ -5,10 +5,12 @@ const apiKey = 'a382eb8e2fef8e0b6f1cb8537e0daf01';
 const openWeatherMapURI = 'https://api.openweathermap.org/data/2.5/onecall';
 const searchByCityURI = 'https://api.openweathermap.org/data/2.5/weather';
 
-String language = 'en';
-String unit = 'metric';
+
 
 class WeatherModel {
+  WeatherModel({this.language = 'en',this.unit = 'metric'});
+  String language;
+  String unit;
   Future<dynamic> getCityWeather(String cityName) async {
     NetworkingHelper networkingHelper = NetworkingHelper(
         '$searchByCityURI?q=$cityName&appid=$apiKey&lang=$language&units=$unit');

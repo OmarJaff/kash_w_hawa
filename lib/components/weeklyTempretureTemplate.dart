@@ -6,7 +6,7 @@ class WeeklyTempretureTemplate extends StatelessWidget {
   final String day;
   final String imageSource;
   final String status;
-  final String tempreture;
+  final int tempreture;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class WeeklyTempretureTemplate extends StatelessWidget {
               ),
               SizedBox(height: 4,),
               Text(
-                tempreture,
+                tempreture.toString(),
                 style: TextStyle(fontWeight: FontWeight.bold),
               )
             ],

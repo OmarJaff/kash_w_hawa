@@ -3,10 +3,11 @@ import 'package:KashWHawa/components/customizedRadioButton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/utilities/constants.dart';
-import 'package:KashWHawa/components/unitRadioButton.dart';
+import 'package:KashWHawa/services/weather.dart';
 import 'package:flutter/rendering.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:KashWHawa/components/developerNameString.dart';
+import 'package:KashWHawa/screens/loading_screen.dart';
 
 enum TempretureUnits { imperial, metric }
 enum Languages { english, arabic }
@@ -17,6 +18,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  var weather = WeatherModel();
   TempretureUnits selectedUnit = TempretureUnits.metric;
   Languages selectedLanguage = Languages.english;
   TapGestureRecognizer _tapGestureRecognizer;
@@ -44,7 +46,6 @@ class _SettingsState extends State<Settings> {
         children: [
           Container(
             padding: const EdgeInsets.all(25.0),
-
             child: Text(
               'Settings',
               style: TextStyle(
@@ -81,6 +82,7 @@ class _SettingsState extends State<Settings> {
                           onChanged: (v) {
                             setState(() {
                               selectedUnit = TempretureUnits.metric;
+                              weather.unit = 'metric';
                             });
                           },
                         ),
@@ -104,6 +106,10 @@ class _SettingsState extends State<Settings> {
                           onChanged: (v) {
                             setState(() {
                               selectedUnit = TempretureUnits.imperial;
+                              weather.unit = 'imperial';
+                              setState(() {
+                                weather.getCurrentLocationWeather();
+                              });
                             });
                           },
                         ),
