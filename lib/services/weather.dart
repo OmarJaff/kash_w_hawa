@@ -13,6 +13,7 @@ class WeatherModel {
     NetworkingHelper networkingHelper = NetworkingHelper(
         '$searchByCityURI?q=$cityName&appid=$apiKey&lang=$language&units=$unit');
     var weatherData = await networkingHelper.getData();
+print(weatherData);
     return weatherData;
   }
 

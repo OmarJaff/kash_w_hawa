@@ -10,11 +10,8 @@ import 'package:KashWHawa/components/mainAppTitle.dart';
 import 'package:intl/intl.dart';
 import 'package:KashWHawa/screens/loading_screen.dart';
 
-
-
 class CurrentWeather extends StatefulWidget {
-  
- CurrentWeather({this.weatherDataFromAPI});
+  CurrentWeather({this.weatherDataFromAPI});
 
   final dynamic weatherDataFromAPI;
 
@@ -23,32 +20,31 @@ class CurrentWeather extends StatefulWidget {
 }
 
 class _CurrentWeatherState extends State<CurrentWeather> {
+  int tempreture;
+  var weatherDescription;
+  var windSpeed;
+  var humidity;
+  var feelLike;
+  String weatherConditionImageSource;
+  String weatherIcon;
+  String cityName;
+  DateTime dateToday = DateTime.now();
 
-    int tempreture;
-    var weatherDescription;
-    var windSpeed;
-    var humidity;
-    var feelLike;
-    var timeZone;
-    String weatherConditionImageSource;
-    String weatherIcon;
-    String cityName;
-    DateTime dateToday = DateTime.now();
-
-  List <dynamic> hourlyWeatherData;
+  List<dynamic> hourlyWeatherData;
 
   String getTodayDay() {
     return DateFormat('EEEE').format(dateToday);
-    }
-
-  Future<dynamic> getData( ) async{
-     updateUI(widget.weatherDataFromAPI);
   }
 
+  Future<dynamic> getData() async {
+    updateUI(widget.weatherDataFromAPI);
+  }
+
+  bool isSearchedByCityName = false;
 
   @override
-  void initState(){
-      getData();
+  void initState() {
+    getData();
     // TODO: implement initState
     super.initState();
   }
@@ -62,6 +58,38 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       return;
     }
 
+    if (isSearchedByCityName == true) {
+      setState(() {
+        if (weatherData['cod'] == '404' ) {
+            showDialog(context: context,
+            builder: (BuildContext context)
+            {
+              return  AlertDialog(
+                title: Text('Unknown city name'),
+                content: Text('Please Enter a valid City Name'),
+                actions: [
+                  new FlatButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: new Text('Close'))
+                ],
+              );
+            }
+            );
+
+          return;
+        }
+        tempreture = weatherData['main']['temp'].toInt();
+        weatherDescription = weatherData['weather'][0]['description'];
+        windSpeed = weatherData['wind']['wind_speed'];
+        humidity = weatherData['main']['humidity'];
+        feelLike = weatherData['main']['feels_like'].toInt();
+        cityName = weatherData['name'];
+        weatherConditionImageSource = weatherData['weather'][0]['icon'];
+      });
+      return;
+    }
 
     setState(() {
       hourlyWeatherData = weatherData['hourly'];
@@ -69,15 +97,14 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       weatherDescription = weatherData['current']['weather'][0]['description'];
       windSpeed = weatherData['current']['wind_speed'];
       humidity = weatherData['current']['humidity'];
-      timeZone = weatherData['timezone'];
+      cityName = weatherData['timezone'];
       feelLike = weatherData['current']['feels_like'].toInt();
-      cityName = weatherData['name'];
-      weatherConditionImageSource = weatherData['current']['weather'][0]['icon'];
+      weatherConditionImageSource =
+          weatherData['current']['weather'][0]['icon'];
     });
   }
 
   Widget build(BuildContext context) {
-
     var weather = WeatherModel();
 
     return SafeArea(
@@ -86,17 +113,20 @@ class _CurrentWeatherState extends State<CurrentWeather> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
-            flex:1,
+            flex: 1,
             child: Padding(
-              padding: const EdgeInsets.only(top:20.0),
+              padding: const EdgeInsets.only(top: 20.0),
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Column(children: [
+                      child: Column(
+                    children: [
                       FlatButton(
                         onPressed: () {
                           setState(() {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              isSearchedByCityName = false;
                               return LoadingScreen();
                             }));
                           });
@@ -107,29 +137,32 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                           size: kIconSize,
                         ),
                       ),
-                ],)
-                  ),
+                    ],
+                  )),
                   Expanded(
                     flex: 3,
                     child: Column(
                       children: <Widget>[
                         MainAppTitleName(),
                         SizedBox(height: 4),
-                        Text(timeZone.toString())
+                        Text(cityName.toString())
                       ],
                     ),
                   ),
                   Expanded(
-                    child:  Column(
+                    child: Column(
                       children: [
                         FlatButton(
                           onPressed: () async {
                             var typedName = await Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => CityScreen()),
+                              MaterialPageRoute(
+                                  builder: (context) => CityScreen()),
                             );
                             if (typedName != null) {
-                              var weatherData = await weather.getCityWeather(typedName);
+                              var weatherData =
+                                  await weather.getCityWeather(typedName);
+                              isSearchedByCityName = true;
                               updateUI(weatherData);
                             }
                           },
@@ -147,19 +180,18 @@ class _CurrentWeatherState extends State<CurrentWeather> {
             ),
           ),
           Expanded(
-            flex:8,
+            flex: 8,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Expanded(
-                  flex:2,
+                    flex: 2,
                     child: Image.asset(
-                  weather.getWeatherImage(weatherConditionImageSource),
+                      weather.getWeatherImage(weatherConditionImageSource),
                       scale: 1,
-                )),
-                
+                    )),
                 Padding(
-                    padding: EdgeInsets.only(top:10),
+                    padding: EdgeInsets.only(top: 10),
                     child: Text(weatherDescription.toString())),
                 Expanded(
                   child: Row(
@@ -198,13 +230,11 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                                 value: windSpeed,
                                 symbol: 'mph',
                               ),
-
                               WeatherInfoCard(
                                 label: 'Humidity',
                                 value: humidity,
                                 symbol: '%',
                               ),
-
                               WeatherInfoCard(
                                 label: 'Feels Like',
                                 value: feelLike,
@@ -213,11 +243,9 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                             ],
                           ),
                         ),
-
                       ],
                     )),
-
-                Expanded(
+              if(!isSearchedByCityName)  Expanded(
                   flex: 2,
                   child: Column(
                     children: [
@@ -237,10 +265,13 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           children: [
-                            for(var data in hourlyWeatherData)
-                                DailyTempretureTemplate(
-                                time:  DateFormat().add_j().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
-                                imageSource: weather.getWeatherImage(data['weather'][0]['icon']),
+                            for (var data in hourlyWeatherData)
+                              DailyTempretureTemplate(
+                                time: DateFormat().add_j().format(
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                        data['dt'] * 1000)),
+                                imageSource: weather.getWeatherImage(
+                                    data['weather'][0]['icon']),
                                 temperature: data['temp'].toInt(),
                               )
                           ],
@@ -259,5 +290,3 @@ class _CurrentWeatherState extends State<CurrentWeather> {
 }
 
 //DateFormat.jm().format(DateTime(data['dt'])).toString()
-
-
