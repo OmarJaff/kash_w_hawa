@@ -14,37 +14,35 @@ import 'package:intl/intl.dart';
 
 class CurrentWeather extends StatefulWidget {
   
-//  CurrentWeather({this.weatherData});
-//  final dynamic weatherData;
+ CurrentWeather({this.weatherDataFromAPI});
+
+  final dynamic weatherDataFromAPI;
 
   @override
   _CurrentWeatherState createState() => _CurrentWeatherState();
 }
 
 class _CurrentWeatherState extends State<CurrentWeather> {
-  WeatherModel weather = WeatherModel();
 
-  int tempreture;
-  var weatherDescription;
-  var windSpeed;
-  var humidity;
-  var feelLike;
-  var timeZone;
-  String weatherConditionImageSource;
-  String weatherIcon;
-  String cityName;
-  DateTime dateToday = DateTime.now();
+    int tempreture;
+    var weatherDescription;
+    var windSpeed;
+    var humidity;
+    var feelLike;
+    var timeZone;
+    String weatherConditionImageSource;
+    String weatherIcon;
+    String cityName;
+    DateTime dateToday = DateTime.now();
 
-  dynamic _weatherData;
   List <dynamic> dailyWeatherData;
 
   String getTodayDay() {
     return DateFormat('EEEE').format(dateToday);
-  }
+    }
 
   Future<dynamic> getData( ) async{
-     _weatherData = await WeatherModel().getCurrentLocationWeather();
-     updateUI(_weatherData);
+     updateUI(widget.weatherDataFromAPI);
   }
 
 
@@ -74,7 +72,6 @@ class _CurrentWeatherState extends State<CurrentWeather> {
 //        return;
 //      });
 //    }
-
     setState(() {
       dailyWeatherData = weatherData['hourly'];
       tempreture = weatherData['current']['temp'].toInt();
@@ -89,6 +86,9 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   }
 
   Widget build(BuildContext context) {
+
+    var weather = WeatherModel();
+
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

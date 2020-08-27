@@ -9,6 +9,7 @@ import 'package:KashWHawa/screens/forcasts.dart';
 class LocationScreen extends StatefulWidget {
 
   LocationScreen({this.weatherData});
+
   final dynamic weatherData;
 
   @override
@@ -18,21 +19,20 @@ class LocationScreen extends StatefulWidget {
 
 
 class _LocationScreenState extends State<LocationScreen> {
+
   int _pageIndex = 0;
 
   PageController _pageController;
 
-  List<Widget> tabPages = [
-    CurrentWeather(),
-    Forcasts(),
-    Settings(),
-  ];
+
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _pageIndex);
   }
+
+
 
   @override
   void dispose() {
@@ -52,8 +52,14 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   @override
-
   Widget build(BuildContext context) {
+
+    List<Widget> tabPages = [
+      CurrentWeather(weatherDataFromAPI: widget.weatherData,),
+      Forcasts(),
+      Settings(),
+    ];
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       bottomNavigationBar: 
