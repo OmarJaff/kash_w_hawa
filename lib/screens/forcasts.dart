@@ -3,13 +3,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:KashWHawa/components/weeklyTempretureTemplate.dart';
 import 'package:KashWHawa/components/mainAppTitle.dart';
+import 'package:intl/intl.dart';
+import 'package:KashWHawa/services/weather.dart';
 
 class Forcasts extends StatefulWidget {
+
+  Forcasts({this.forcastsDataFromAPI, this.timeZone});
+
+  dynamic forcastsDataFromAPI;
+  dynamic timeZone;
+
   @override
   _ForcastsState createState() => _ForcastsState();
 }
 
 class _ForcastsState extends State<Forcasts> {
+  var weather = WeatherModel();
+  @override
+  void initState() {
+    dailyWeatherData = widget.forcastsDataFromAPI;
+    super.initState();
+  }
+
+  List<dynamic> dailyWeatherData;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +39,7 @@ class _ForcastsState extends State<Forcasts> {
               children: <Widget>[
                  MainAppTitleName(),
                 SizedBox(height: 4),
-                Text('Erbil, Iraq')
+                Text(widget.timeZone.toString())
               ],
             ),
           )),
@@ -36,30 +53,14 @@ class _ForcastsState extends State<Forcasts> {
               scrollDirection: Axis.vertical,
               physics: BouncingScrollPhysics(),
               children: [
-                WeeklyTempretureTemplate(
-                    date: 'Aug 22',
-                    day: 'Saturday',
-                    status: 'Clean',
-                    imageSource: 'assets/images/clear-day.png',
+                for(var data in dailyWeatherData)
+                  WeeklyTempretureTemplate(
+                    date: DateFormat().add_MMMd().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
+                    day: DateFormat().add_EEEE().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
+                    status: data['weather'][0]['description'],
+                    imageSource: weather.getWeatherImage(data['weather'][0]['icon']),
                     tempreture: '29°C'),
-                WeeklyTempretureTemplate(
-                    date: 'Aug 23',
-                    day: 'Sunday',
-                    status: 'Clean',
-                    imageSource: 'assets/images/clear-day.png',
-                    tempreture: '28°C'),
-                WeeklyTempretureTemplate(
-                    date: 'Aug 24',
-                    day: 'Monday',
-                    status: 'Cloudy',
-                    imageSource: 'assets/images/few-clouds.png',
-                    tempreture: '25°C'),
-                WeeklyTempretureTemplate(
-                    date: 'Aug 25',
-                    day: 'Thursday',
-                    status: 'Clean',
-                    imageSource: 'assets/images/clear-day.png',
-                    tempreture: '22°C'),
+
               ],
             ),
           )

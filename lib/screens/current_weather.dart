@@ -35,7 +35,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
     String cityName;
     DateTime dateToday = DateTime.now();
 
-  List <dynamic> dailyWeatherData;
+  List <dynamic> hourlyWeatherData;
 
   String getTodayDay() {
     return DateFormat('EEEE').format(dateToday);
@@ -73,7 +73,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
 //      });
 //    }
     setState(() {
-      dailyWeatherData = weatherData['hourly'];
+      hourlyWeatherData = weatherData['hourly'];
       tempreture = weatherData['current']['temp'].toInt();
       weatherDescription = weatherData['current']['weather'][0]['description'];
       windSpeed = weatherData['current']['wind_speed'];
@@ -240,7 +240,8 @@ class _CurrentWeatherState extends State<CurrentWeather> {
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           children: [
-                            for(var data in dailyWeatherData)   DailyTempretureTemplate(
+                            for(var data in hourlyWeatherData)
+                                DailyTempretureTemplate(
                                 time:  DateFormat().add_j().format(DateTime.fromMillisecondsSinceEpoch(data['dt'] * 1000)),
                                 imageSource: weather.getWeatherImage(data['weather'][0]['icon']),
                                 temperature: data['temp'].toInt(),

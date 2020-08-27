@@ -56,7 +56,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
     List<Widget> tabPages = [
       CurrentWeather(weatherDataFromAPI: widget.weatherData,),
-      Forcasts(),
+      Forcasts(forcastsDataFromAPI: widget.weatherData['daily'],timeZone: widget.weatherData['timezone'],),
       Settings(),
     ];
 
