@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Color(0xFFE5F0FC),
           unselectedWidgetColor: kPrimaryColor),
+      debugShowCheckedModeBanner: false,
       home: LoadingScreen(),
     );
   }
