@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'city_screen.dart';
 import 'package:KashWHawa/components/dailyTempretureTemplate.dart';
 import 'package:KashWHawa/components/WeatherInfoCard.dart';
@@ -179,108 +180,112 @@ class _CurrentWeatherState extends State<CurrentWeather> {
               ),
             ),
           ),
-          Expanded(
-            flex: 8,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                    flex: 2,
-                    child: Image.asset(
-                      weather.getWeatherImage(weatherConditionImageSource),
-                      scale: 1,
-                    )),
-                Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text(weatherDescription.toString())),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        tempreture.toString(),
-                        style: TextStyle(color: kTextColor, fontSize: 80),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(top: 12),
-                        child: Text(
-                          '°C',
-                          style: TextStyle(
-                              color: kTextColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+
+          Consumer<WeatherModel>(
+            builder: (context, model , child) =>
+            Expanded(
+              flex: 8,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                      flex: 2,
+                      child: Image.asset(
+                        weather.getWeatherImage(weatherConditionImageSource),
+                        scale: 1,
+                      )),
+                  Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Text(weatherDescription.toString())),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          tempreture.toString(),
+                          style: TextStyle(color: kTextColor, fontSize: 80),
                         ),
-                      ),
-                    ],
+                        Container(
+                          padding: EdgeInsets.only(top: 12),
+                          child: Text(
+                            '°C',
+                            style: TextStyle(
+                                color: kTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                    flex: 1,
-                    child: ListView(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
+                  Expanded(
+                      flex: 1,
+                      child: ListView(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 20, right: 20),
+                            child: Row(
+                              children: [
+                                WeatherInfoCard(
+                                  label: 'wind',
+                                  value: windSpeed,
+                                  symbol: 'mph',
+                                ),
+                                WeatherInfoCard(
+                                  label: 'Humidity',
+                                  value: humidity,
+                                  symbol: '%',
+                                ),
+                                WeatherInfoCard(
+                                  label: 'Feels Like',
+                                  value: feelLike,
+                                  symbol: '°C',
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      )),
+                if(!isSearchedByCityName)  Expanded(
+                    flex: 2,
+                    child: Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 20, right: 20),
-                          child: Row(
+                          margin: EdgeInsets.only(left: 15, top: 15),
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            '${getTodayDay()}, Today',
+                            style: TextStyle(
+                                color: kTextColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView(
+                            physics: BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
                             children: [
-                              WeatherInfoCard(
-                                label: 'wind',
-                                value: windSpeed,
-                                symbol: 'mph',
-                              ),
-                              WeatherInfoCard(
-                                label: 'Humidity',
-                                value: humidity,
-                                symbol: '%',
-                              ),
-                              WeatherInfoCard(
-                                label: 'Feels Like',
-                                value: feelLike,
-                                symbol: '°C',
-                              )
+                              for (var data in hourlyWeatherData)
+                                DailyTempretureTemplate(
+                                  time: DateFormat().add_j().format(
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          data['dt'] * 1000)),
+                                  imageSource: weather.getWeatherImage(
+                                      data['weather'][0]['icon']),
+                                  temperature: data['temp'].toInt(),
+                                )
                             ],
                           ),
                         ),
                       ],
-                    )),
-              if(!isSearchedByCityName)  Expanded(
-                  flex: 2,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 15, top: 15),
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          '${getTodayDay()}, Today',
-                          style: TextStyle(
-                              color: kTextColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView(
-                          physics: BouncingScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            for (var data in hourlyWeatherData)
-                              DailyTempretureTemplate(
-                                time: DateFormat().add_j().format(
-                                    DateTime.fromMillisecondsSinceEpoch(
-                                        data['dt'] * 1000)),
-                                imageSource: weather.getWeatherImage(
-                                    data['weather'][0]['icon']),
-                                temperature: data['temp'].toInt(),
-                              )
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

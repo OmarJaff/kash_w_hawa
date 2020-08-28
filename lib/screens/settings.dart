@@ -19,8 +19,10 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   var weather = WeatherModel();
+
   TempretureUnits selectedUnit = TempretureUnits.metric;
   Languages selectedLanguage = Languages.english;
+
   TapGestureRecognizer _tapGestureRecognizer;
   @override
   void initState() {
@@ -69,62 +71,58 @@ class _SettingsState extends State<Settings> {
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8, top: 8),
-                child: Expanded(
-                  child: Row(
-                    children: [
-                      CustomizedRadioButton(
-                        radioButton: Radio(
-                          materialTapTargetSize:
-                          MaterialTapTargetSize.shrinkWrap,
-                          activeColor: kActiveItemColor,
-                          value: TempretureUnits.metric,
-                          groupValue: selectedUnit,
-                          onChanged: (v) {
-                            setState(() {
-                              selectedUnit = TempretureUnits.metric;
-                              weather.unit = 'metric';
-                            });
-                          },
-                        ),
-                        onSelect: () {
+                child: Row(
+                  children: [
+                    CustomizedRadioButton(
+                      radioButton: Radio(
+                        materialTapTargetSize:
+                        MaterialTapTargetSize.shrinkWrap,
+                        activeColor: kActiveItemColor,
+                        value: TempretureUnits.metric,
+                        groupValue: selectedUnit,
+                        onChanged: (v) {
                           setState(() {
                             selectedUnit = TempretureUnits.metric;
+
                           });
                         },
-                        labelColor: selectedUnit == TempretureUnits.metric
-                            ? kActiveItemColor
-                            : kPrimaryColor,
-                        label: 'Celsius',
                       ),
-                      CustomizedRadioButton(
-                        radioButton: Radio(
-                          materialTapTargetSize:
-                          MaterialTapTargetSize.shrinkWrap,
-                          activeColor: kActiveItemColor,
-                          value: TempretureUnits.imperial,
-                          groupValue: selectedUnit,
-                          onChanged: (v) {
-                            setState(() {
-                              selectedUnit = TempretureUnits.imperial;
-                              weather.unit = 'imperial';
-                              setState(() {
-                                weather.getCurrentLocationWeather();
-                              });
-                            });
-                          },
-                        ),
-                        onSelect: () {
+                      onSelect: () {
+                        setState(() {
+                          selectedUnit = TempretureUnits.metric;
+                        });
+                      },
+                      labelColor: selectedUnit == TempretureUnits.metric
+                          ? kActiveItemColor
+                          : kPrimaryColor,
+                      label: 'Celsius',
+                    ),
+                    CustomizedRadioButton(
+                      radioButton: Radio(
+                        materialTapTargetSize:
+                        MaterialTapTargetSize.shrinkWrap,
+                        activeColor: kActiveItemColor,
+                        value: TempretureUnits.imperial,
+                        groupValue: selectedUnit,
+                        onChanged: (v) {
                           setState(() {
                             selectedUnit = TempretureUnits.imperial;
+                            weather.changeUnit('Fahrenheit');
                           });
                         },
-                        labelColor: selectedUnit == TempretureUnits.imperial
-                            ? kActiveItemColor
-                            : kPrimaryColor,
-                        label: 'Fahrenheit',
                       ),
-                    ],
-                  ),
+                      onSelect: () {
+                        setState(() {
+                          selectedUnit = TempretureUnits.imperial;
+                          weather.changeUnit('Fahrenheit');
+                        });
+                      },
+                      labelColor: selectedUnit == TempretureUnits.imperial
+                          ? kActiveItemColor
+                          : kPrimaryColor,
+                      label: 'Fahrenheit',
+                    ),
+                  ],
                 ),
               ),
             ],

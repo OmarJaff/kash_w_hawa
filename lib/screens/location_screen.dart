@@ -1,10 +1,12 @@
 import 'package:KashWHawa/screens/current_weather.dart';
+import 'package:KashWHawa/services/weather.dart';
 import 'package:KashWHawa/utilities/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:KashWHawa/screens/settings.dart';
 import 'package:KashWHawa/screens/forcasts.dart';
+import 'package:provider/provider.dart';
 
 class LocationScreen extends StatefulWidget {
 
@@ -60,38 +62,45 @@ class _LocationScreenState extends State<LocationScreen> {
       Settings(),
     ];
 
-    return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      bottomNavigationBar: 
-      BottomNavigationBar(
-        currentIndex: _pageIndex,
-            onTap: onTabTapped,
-            backgroundColor: kbackgroundColor,
-            selectedItemColor: kActiveItemColor,
+    return  ChangeNotifierProvider(
+      create: (context) => WeatherModel(),
+      child: Scaffold(
+        resizeToAvoidBottomPadding: false,
+        bottomNavigationBar: 
+        BottomNavigationBar(
+          currentIndex: _pageIndex,
+              onTap: onTabTapped,
+              backgroundColor: kbackgroundColor,
+              selectedItemColor: kActiveItemColor,
 
-          items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.wb_cloudy,
-              size: kbottomBarIconSize,
-            ),
-            title: Text("Today's weather")),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.ac_unit,
-              size: kbottomBarIconSize,
-            ),
-            title: Text('Forecasts')
-        ) ,
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              title: Text('Settings'),
-            ),
-      ]),
-        body:  PageView(children: tabPages,
-      onPageChanged: onPageChange,
-      controller: _pageController,
-    ),
+            items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.wb_cloudy,
+                size: kbottomBarIconSize,
+              ),
+              title: Text("Today's weather")),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.ac_unit,
+                size: kbottomBarIconSize,
+              ),
+              title: Text('Forecasts')
+          ) ,
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                title: Text('Settings'),
+              ),
+        ]),
+          body:Consumer<WeatherModel>(
+                builder: (context, cart, child) {
+                    return PageView(children: tabPages,
+                      onPageChanged: onPageChange,
+                      controller: _pageController,
+                    );
+                },
+          )
+      ),
     );
   }
 }

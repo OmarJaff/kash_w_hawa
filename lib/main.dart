@@ -1,9 +1,15 @@
+import 'package:KashWHawa/services/weather.dart';
 import './utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:KashWHawa/screens/loading_screen.dart';
 
-void main() => runApp(MyApp());
+
+
+
+void main() => runApp(
+    MyApp()
+    );
 
 class MyApp extends StatelessWidget {
   @override
@@ -14,12 +20,10 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp(
       theme: ThemeData.light().copyWith(
-      primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor:Color(0xFFE5F0FC),
-          unselectedWidgetColor:kPrimaryColor
-      ),
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: Color(0xFFE5F0FC),
+          unselectedWidgetColor: kPrimaryColor),
       home: LoadingScreen(),
     );
-
   }
 }
