@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      theme: ThemeData.light().copyWith(
+        theme: ThemeData.light().copyWith(
           primaryColor: kPrimaryColor,
           scaffoldBackgroundColor: Color(0xFFE5F0FC),
           unselectedWidgetColor: kPrimaryColor),

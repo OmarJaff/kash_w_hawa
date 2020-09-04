@@ -1,7 +1,6 @@
 import 'package:KashWHawa/services/location.dart';
 import 'package:KashWHawa/services/networking.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:KashWHawa/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 const apiKey = 'a382eb8e2fef8e0b6f1cb8537e0daf01';
 const openWeatherMapURI = 'https://api.openweathermap.org/data/2.5/onecall';
@@ -13,6 +12,7 @@ class WeatherModel extends ChangeNotifier {
 
   String _language = 'en';
   String _unit = 'metric';
+  Location _location = Location();
 
   Future<dynamic> getCityWeather(String cityName) async {
     NetworkingHelper networkingHelper = NetworkingHelper(
@@ -22,14 +22,17 @@ class WeatherModel extends ChangeNotifier {
   }
 
   Future<dynamic> getCurrentLocationWeather() async {
-    Location location = Location();
-    await location.getCurrentLocation();
+
+    await _location.getCurrentLocation();
     NetworkingHelper networkingHelper = NetworkingHelper(
-        '$openWeatherMapURI?lat=${location.latitude}&lon=${location.longitude}&lang=$_language&exclude=minutely&appid=$apiKey&units=$_unit');
+        '$openWeatherMapURI?lat=${_location.latitude}&lon=${_location.longitude}&lang=$_language&exclude=minutely&appid=$apiKey&units=$_unit');
     var weatherData = await networkingHelper.getData();
-    print(weatherData);
-    return weatherData;
+    String cityName = _location.CityName;
+
+    return [weatherData,cityName];
   }
+
+  
 
   void changeUnit(String unit) async{
     _unit = unit;

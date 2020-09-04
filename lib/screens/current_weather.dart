@@ -12,10 +12,11 @@ import 'package:intl/intl.dart';
 import 'package:KashWHawa/screens/loading_screen.dart';
 
 class CurrentWeather extends StatefulWidget {
-  CurrentWeather({this.weatherDataFromAPI});
+
+  CurrentWeather({this.weatherDataFromAPI, this.cityName});
 
   final dynamic weatherDataFromAPI;
-
+  final String cityName;
   @override
   _CurrentWeatherState createState() => _CurrentWeatherState();
 }
@@ -30,6 +31,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   String weatherIcon;
   String cityName;
   DateTime dateToday = DateTime.now();
+  var weather = WeatherModel();
 
   List<dynamic> hourlyWeatherData;
 
@@ -40,6 +42,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   Future<dynamic> getData() async {
     updateUI(widget.weatherDataFromAPI);
   }
+
 
   bool isSearchedByCityName = false;
 
@@ -92,13 +95,14 @@ class _CurrentWeatherState extends State<CurrentWeather> {
       return;
     }
 
+
     setState(() {
       hourlyWeatherData = weatherData['hourly'];
       tempreture = weatherData['current']['temp'].toInt();
       weatherDescription = weatherData['current']['weather'][0]['description'];
       windSpeed = weatherData['current']['wind_speed'];
       humidity = weatherData['current']['humidity'];
-      cityName = weatherData['timezone'];
+      cityName = widget.cityName;
       feelLike = weatherData['current']['feels_like'].toInt();
       weatherConditionImageSource =
           weatherData['current']['weather'][0]['icon'];
@@ -106,7 +110,7 @@ class _CurrentWeatherState extends State<CurrentWeather> {
   }
 
   Widget build(BuildContext context) {
-    var weather = WeatherModel();
+
 
     return SafeArea(
       child: Column(

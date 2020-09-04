@@ -10,10 +10,10 @@ import 'package:provider/provider.dart';
 
 class LocationScreen extends StatefulWidget {
 
-  LocationScreen({this.weatherData});
+  LocationScreen({this.weatherData, this.cityName});
 
   final dynamic weatherData;
-
+  final String cityName;
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -57,8 +57,8 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
 
     List<Widget> tabPages = [
-      CurrentWeather(weatherDataFromAPI: widget.weatherData,),
-      Forcasts(forcastsDataFromAPI: widget.weatherData['daily'],timeZone: widget.weatherData['timezone'],),
+      CurrentWeather(weatherDataFromAPI: widget.weatherData, cityName: widget.cityName,),
+      Forcasts(forcastsDataFromAPI: widget.weatherData['daily'],cityName: widget.cityName,),
       Settings(),
     ];
 

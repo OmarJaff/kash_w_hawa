@@ -8,10 +8,10 @@ import 'package:KashWHawa/services/weather.dart';
 
 class Forcasts extends StatefulWidget {
 
-  Forcasts({this.forcastsDataFromAPI, this.timeZone});
+  Forcasts({this.forcastsDataFromAPI, this.cityName});
 
-  dynamic forcastsDataFromAPI;
-  dynamic timeZone;
+  final dynamic forcastsDataFromAPI;
+  final String cityName;
 
   @override
   _ForcastsState createState() => _ForcastsState();
@@ -39,7 +39,7 @@ class _ForcastsState extends State<Forcasts> {
               children: <Widget>[
                  MainAppTitleName(),
                 SizedBox(height: 4),
-                Text(widget.timeZone.toString())
+                Text(widget.cityName)
               ],
             ),
           )),
